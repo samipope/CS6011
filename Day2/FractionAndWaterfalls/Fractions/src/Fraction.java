@@ -43,32 +43,36 @@ public class Fraction {
         this.numerator = numerator;
         this.denominator = denominator;
         //call in reduce here?
+        reduce(this);
     }
 
-    public void plus(Fraction rhs){
+    public Fraction plus(Fraction rhs){
             long newDenominator = this.denominator * rhs.denominator;
             long newNumerator = (this.numerator * rhs.denominator) + (rhs.numerator * this.denominator);
-            this.numerator = newNumerator;
-            this.denominator = newDenominator;
-            reduce(this);
+            Fraction resultofPlus = new Fraction(newNumerator, newDenominator);
+            return resultofPlus;
         }
-    public void minus(Fraction rhs){
+    public Fraction minus(Fraction rhs){
         reduce(rhs);
             long newDenominator = this.denominator * rhs.denominator;
             long newNumerator = (this.numerator * rhs.denominator) - (rhs.numerator * this.denominator);
+        Fraction resultofMinus = new Fraction(newNumerator, newDenominator);
+        return resultofMinus;
 
-            this.numerator = newNumerator;
-            this.denominator = newDenominator;
     }
 
-    public void times(Fraction rhs){
-        this.numerator= rhs.numerator * this.numerator;
-        this.denominator= rhs.denominator * this.denominator;
+    public Fraction times(Fraction rhs){
+        long newNumerator= rhs.numerator * this.numerator;
+        long newDenominator= rhs.denominator * this.denominator;
+        Fraction resultofTimes = new Fraction(newNumerator, newDenominator);
+        return resultofTimes;
     }
 
-    public void dividedBy(Fraction rhs){
-        this.numerator=this.numerator * rhs.denominator;
-        this.denominator=this.denominator * rhs.numerator;
+    public Fraction dividedBy(Fraction rhs){
+        long newNumerator=this.numerator * rhs.denominator;
+        long newDenominator=this.denominator * rhs.numerator;
+        Fraction resultofDivided = new Fraction(newNumerator, newDenominator);
+        return resultofDivided;
     }
     public Fraction reciprocal(){
         long newDenom = this.denominator;

@@ -7,13 +7,5 @@ Fraction f2 = new Fraction(1,4);
 //the print function looks at the toString method in the class and then it prints out the function
 System.out.print(f2);
 
-        Fraction f3 = new Fraction(-1,4);
-//the print function looks at the toString method in the class and then it prints out the function
-        System.out.print(f3);
-
-        Fraction f4 = new Fraction(-1,-4);
-//the print function looks at the toString method in the class and then it prints out the function
-        System.out.print(f4);
-
-        }
+    }
     }

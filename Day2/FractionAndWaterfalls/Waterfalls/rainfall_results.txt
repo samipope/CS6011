@@ -1,0 +1,12 @@
+The average rainfall amount for January is NaN inches.
+The average rainfall amount for February is NaN inches.
+The average rainfall amount for March is NaN inches.
+The average rainfall amount for April is NaN inches.
+The average rainfall amount for May is NaN inches.
+The average rainfall amount for June is NaN inches.
+The average rainfall amount for July is NaN inches.
+The average rainfall amount for August is NaN inches.
+The average rainfall amount for September is NaN inches.
+The average rainfall amount for October is NaN inches.
+The average rainfall amount for November is NaN inches.
+The average rainfall amount for December is NaN inches.
