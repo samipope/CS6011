@@ -2,7 +2,9 @@
 // then press Enter. You can now see whitespace characters in your code.
 public class Main {
     public static void main(String[] args) {
-        RainData rainData = new RainData("Macon.txt");
+        String path = "/Users/samanthapope/6011Github/CS6011/Day2/FractionAndWaterfalls/Waterfalls/src/Macon.txt";
+        RainData rainData = new RainData(path);
+
 
         // Calculate and print the overall average rainfall
         double overallAverage = rainData.calculateOverallAverage();

@@ -3,9 +3,9 @@
 
 public class Main {
     public static void main(String[] args) {
-Fraction f2 = new Fraction(1,4);
-//the print function looks at the toString method in the class and then it prints out the function
-System.out.print(f2);
+//I tested that my exception would work and it does if you call main. it also prints out an error message saying that the denominator cannot be 0
+        //i threw this exception into both of my contructors
+        Fraction f4 = new Fraction(1, 0);
 
     }
-    }
+}

@@ -27,23 +27,36 @@ public class Fraction {
 
     // default constructor - don't have to check for denom=0
     public Fraction() {
-        if(numerator<0 && denominator<0){
-            numerator = -1* numerator;
-            denominator = -1*denominator;
+        if (denominator==0){
+            throw new IllegalArgumentException("Denominator cannot be 0");
         }
-        this.numerator = 0;
-        this.denominator = 1;
+        try {
+            if (numerator < 0 && denominator < 0) {
+                numerator = -1 * numerator;
+                denominator = -1 * denominator;
+            }
+            this.numerator = 0;
+            this.denominator = 1;
+        }catch (IndexOutOfBoundsException e){
+            System.out.println("Exception Message");
+        }
     }
     // constructor where you pass in numerator and denominator
     public Fraction(long numerator, long denominator) {
-        if(numerator<0 && denominator<0){
-            numerator = -1* numerator;
-            denominator = -1*denominator;
+        if (denominator==0){
+            throw new IllegalArgumentException("Denominator cannot be 0");
         }
-        this.numerator = numerator;
-        this.denominator = denominator;
-        //call in reduce here?
-        reduce(this);
+        try {
+            if (numerator < 0 && denominator < 0) {
+                numerator = -1 * numerator;
+                denominator = -1 * denominator;
+            }
+            this.numerator = numerator;
+            this.denominator = denominator;
+            //call in reduce here?
+            reduce(this);
+        } catch (IndexOutOfBoundsException e){
+            System.out.println("Exception Message");}
     }
 
     public Fraction plus(Fraction rhs){
