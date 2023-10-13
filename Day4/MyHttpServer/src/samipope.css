@@ -1,0 +1,19 @@
+body{
+    background-color: royalblue;
+    color: red;
+    font-size: 22px;
+    font-family: fantasy;
+}
+
+p{
+    color: cadetblue;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 14px;
+    background-color: black;
+}
+
+h1{
+    color: cadetblue;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 24px;
+}

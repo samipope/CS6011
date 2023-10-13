@@ -2,26 +2,47 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
-class FractionTest {
-//initializing a bunch of Fractions to test inside my methods
-    Fraction f1 = new Fraction(1,3);
-    Fraction f2 = new Fraction(1,4);
-    Fraction f3 = new Fraction(-1,4);
-    Fraction f4 = new Fraction(1,2);
-    Fraction f5 = new Fraction(2,8);
-    Fraction f6 = new Fraction(7,12);
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
-    //i commented out my other tests for simplicity
-    //below is the test that uses try and catch to make sure my exception is working
+class FractionTest {
+    //initializing a bunch of Fractions to test inside my methods
+    Fraction f1 = new Fraction(1, 3);
+    Fraction f2 = new Fraction(1, 4);
+    Fraction f3 = new Fraction(-1, 4);
+    Fraction f4 = new Fraction(1, 2);
+    Fraction f5 = new Fraction(2, 8);
+    Fraction f6 = new Fraction(7, 12);
+    Fraction f9 = new Fraction(1, 2);
+    Fraction f10 = new Fraction(1, 3);
+
+   // i commented out my other tests for simplicity
     @Test
-    public void testDenominatorZeroException() {
-        // This should throw an IllegalArgumentException
-        try {
-            Fraction fraction = new Fraction(3, 0);
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("Index out of bounds exception");
-        }
+    public void testompareTo(){
+        Assertions.assertEquals(f2.compareTo(f4),-1);
+        Assertions.assertEquals(f1.compareTo(f2),1);
     }
+
+    @Test
+    public void testSort(){
+        ArrayList listOfFracs = new ArrayList<Fraction>(Arrays.asList(f1,f2,f4));
+        Collections.sort(listOfFracs);
+        System.out.println(listOfFracs);
+    }
+
+
+
+    //below is the test that uses try and catch to make sure my exception is working
+//    @Test
+//    public void testDenominatorZeroException() {
+//        // This should throw an IllegalArgumentException
+//        try {
+//            Fraction fraction = new Fraction(3, 0);
+//        } catch (IndexOutOfBoundsException e) {
+//            System.out.println("Index out of bounds exception");
+//        }
+//    }
     //the test above prints "denominator cannot be 0" so I know my code is working
 
 
@@ -65,14 +86,14 @@ class FractionTest {
 //
 //    @org.junit.jupiter.api.Test
 //    void dividedBy() {
-//        assertNotEquals(f2.dividedBy(f3), f2);
-//        assertNotEquals(f4.dividedBy(f1), f4);
-//        assertNotEquals(f2.dividedBy(f1), f3);
-//        assertEquals(f1.dividedBy(f2), new Fraction(4, 3));
-//        assertEquals(f3.dividedBy(f4), new Fraction(-1, 2));
-//        assertEquals(f5.dividedBy(f6), new Fraction(3, 7));
+//       Assertions.assertNotEquals(f2.dividedBy(f3), f2);
+//        Assertions.assertNotEquals(f4.dividedBy(f1), f4);
+//        Assertions.assertNotEquals(f2.dividedBy(f1), f3);
+//        Assertions.assertEquals(f1.dividedBy(f2), new Fraction(4, 3));
+//        Assertions.assertEquals(f3.dividedBy(f4), new Fraction(-1, 2));
+//        Assertions.assertEquals(f5.dividedBy(f6), new Fraction(3, 7));
 //    }
-//
+
 //    @org.junit.jupiter.api.Test
 //    void reciporacal() {
 //        assertNotEquals(f2.reciprocal(), f2);
