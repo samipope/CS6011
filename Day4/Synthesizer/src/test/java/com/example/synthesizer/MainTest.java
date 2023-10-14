@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class MainTest {
 
     public class AudioClipTest {
-        private AudioClip audioClip;
+        // private AudioClip audioClip;
 
         //ADD IN TEST TO GO THRU ALL OF THE SHORT RANGE!!!!
 
@@ -60,6 +60,5 @@ class MainTest {
 //    }
 
 
-
-
+    }
 }

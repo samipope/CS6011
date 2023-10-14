@@ -1,5 +1,11 @@
 package com.example.synthesizer;
 
+
+//have to import the classes from the synthesizer tho make this able to access it
+import com.example.synthesizer.AudioListener;
+import com.example.synthesizer.AudioComponent;
+import com.example.synthesizer.SineWave;
+
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -8,6 +14,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -34,7 +41,6 @@ public class SynthesizerApplication extends Application {
 
           VBox MainLayout=new VBox();
 
-// --------------------FROM LECTURE -------------------------------------------------
         BorderPane mainLayout = new BorderPane();
 
         //right panel
@@ -53,9 +59,7 @@ public class SynthesizerApplication extends Application {
         mainCenter.setStyle("-fx-background-color: black");
         Circle speaker = new Circle(400,200,15);
         speaker.setFill(Color.BLACK);
-
         mainCenter.getChildren().add(speaker);
-
         mainLayout.setCenter(mainCenter);
         mainLayout.setRight(rightpanel);
 
@@ -84,25 +88,25 @@ public class SynthesizerApplication extends Application {
 //      freqSlider.setOnMouseDragged(e->handleSlider(e,freqSlider, freqLabel));
 //        freqBox.getChildren().add(freqSlider);
 
-        AudioComponentWidget play = new AudioComponentWidget(new SineWave(440), MainLayout);
+       // AudioComponentWidget play = new AudioComponentWidget(new SineWave(440), MainLayout);
 
 
-        VBox playBox = new VBox();
+        HBox bottomPanel = new HBox();
         Button playButton = new Button();
         playButton.setPrefSize(50,50);
         //playBox.setStyle("-fx-background-color: rgba(128,128,128,0.63)");
         Label playButtonLabel = new Label("Play");
-      playButton.setOnAction(e-> playAudio(e, play.ac_));
-        playBox.getChildren().add(playButtonLabel);
-        playBox.getChildren().add(playButton);
-        playBox.relocate(390,390);
+        playButton.setOnAction(e-> playAudio(e));
+        bottomPanel.getChildren().add(playButtonLabel);
+        bottomPanel.getChildren().add(playButton);
+        mainLayout.setBottom(bottomPanel);
 
 
 
 
 
         MainLayout.getChildren().add(freqBox);
-        MainLayout.getChildren().add(playBox);
+
 
         stage.setScene(scene);
         stage.show();
@@ -111,22 +115,20 @@ public class SynthesizerApplication extends Application {
 
 
 
-    public static void main(String[] args) {
-        launch();
-    }
-    private void playAudio(javafx.event.ActionEvent e, AudioComponent ac) {
+
+    private void playAudio(javafx.event.ActionEvent e) {
         try {
-            AudioFormat format16 = new AudioFormat(44100, 16, 1, true, false);
+
             Clip c = AudioSystem.getClip(); // Not our AudioClip class
-            AudioListener listener = new AudioListener(c);
-            byte[] data = ac.getClip().getData();
+            AudioFormat format16 = new AudioFormat(44100, 16, 1, true, false);
+            byte[] data = widgets.get(0).ac_.getClip().getData();
             // Reads data from our byte array to play it.
             c.open(format16, data, 0, data.length);
             c.start(); // Actually starts playing the sound.
-            // Don’t end the program until the sound finishes playing...
+            AudioListener listener = new AudioListener(c);
             c.addLineListener(listener);
         } catch (LineUnavailableException k) {
-            //System.out.println(k.getMessage());
+            System.out.println(k.getMessage());
         }
 
     }
@@ -134,7 +136,10 @@ public class SynthesizerApplication extends Application {
         AudioComponent sinewave = new SineWave(200);
         AudioComponentWidget acw = new AudioComponentWidget(sinewave, mainCenter);
         mainCenter.getChildren().add(acw);
-        widgets.add(acw);
+       widgets.add(acw);
     }
+
+    public static void main(String[] args) {
+        launch();}
 }
 

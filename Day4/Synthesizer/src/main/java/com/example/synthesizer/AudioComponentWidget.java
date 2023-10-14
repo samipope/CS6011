@@ -29,36 +29,39 @@ public class AudioComponentWidget extends Pane {
 
    AudioComponent ac_;
 //   AnchorPane parent_;
-   VBox parent_;
+   AnchorPane parent_;
 
-   AudioComponentWidget(AudioComponent ac, VBox parent){
+   AudioComponentWidget(AudioComponent ac, AnchorPane parent){
       ac_=ac;
       parent_=parent;
 
-      VBox baseLayout=new VBox();
+      HBox baseLayout=new HBox();
       Label baselayoutlabel = new Label("SineWave");
       baseLayout.setStyle("-fx-border-color: black; -fx-border-image-width: 5 ");
+      VBox rightSide = new VBox();
       Button closeBtn=new Button("x");
       closeBtn.setOnAction(e->closeWidget(e));
       Circle output = new Circle(10);
       output.setFill(Color.AQUA);
 
-      baseLayout.getChildren().add(closeBtn);
-      baseLayout.getChildren().add(output);
+      rightSide.getChildren().add(closeBtn);
+      rightSide.getChildren().add(output);
 
-      baseLayout.setAlignment(Pos.CENTER);
-      baseLayout.setPadding(new Insets(5));
-      baseLayout.setSpacing(5);
+      rightSide.setAlignment(Pos.CENTER);
+      rightSide.setPadding(new Insets(5));
+      rightSide.setSpacing(5);
+
+
 
       //fix the values in this slider
       Slider freqSlider = new Slider(200, 400, 300);
       freqSlider.setOnMouseDragged(e->setFrequency(e, freqSlider));
       baseLayout.getChildren().add(freqSlider); //to check it later on
-      parent_.getChildren().add(baseLayout);
-//      this.getChildren().add(baseLayout);
+      baseLayout.getChildren().add(rightSide);
+      this.getChildren().add(baseLayout);
 
-      this.setLayoutX(30);
-      this.setLayoutY(30);
+      this.setLayoutX(50);
+      this.setLayoutY(50);
 
    }
 
