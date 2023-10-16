@@ -1,5 +1,5 @@
-package com.example.synthesizer;
-import java.util.Arrays;
+package com.example.synthesizer.synthesizer;
+
 public interface AudioComponent {
 
     AudioClip getClip();

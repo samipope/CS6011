@@ -2,21 +2,19 @@ package com.example.synthesizer;
 
 
 //have to import the classes from the synthesizer tho make this able to access it
-import com.example.synthesizer.AudioListener;
-import com.example.synthesizer.AudioComponent;
-import com.example.synthesizer.SineWave;
+import com.example.synthesizer.synthesizer.*;
+
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.scene.control.Slider;
 
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -38,11 +36,15 @@ public class SynthesizerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-
-          VBox MainLayout=new VBox();
+        VBox MainLayout=new VBox();
 
         BorderPane mainLayout = new BorderPane();
 
+        //center panel
+        AnchorPane mainCenter = new AnchorPane();
+        mainCenter.setStyle("-fx-background-color: pink");
+        Circle speaker = new Circle(400,200,15);
+        speaker.setFill(Color.BLACK);
         //right panel
         VBox rightpanel = new VBox();
         rightpanel.setStyle("-fx-background-color: white");
@@ -50,26 +52,19 @@ public class SynthesizerApplication extends Application {
 
         javafx.scene.control.Button sinwaveBtn = new Button("SineWave");
         rightpanel.getChildren().add(sinwaveBtn);
-       //sinwaveBtn.setOnAction(e-> createComponent(e));
-        rightpanel.getChildren().add(sinwaveBtn);
+       sinwaveBtn.setOnAction(e-> createComponent(e, mainCenter));
 
 
-        //center panel
-        AnchorPane mainCenter = new AnchorPane();
-        mainCenter.setStyle("-fx-background-color: black");
-        Circle speaker = new Circle(400,200,15);
-        speaker.setFill(Color.BLACK);
+
+
+
         mainCenter.getChildren().add(speaker);
         mainLayout.setCenter(mainCenter);
         mainLayout.setRight(rightpanel);
 
 
-
-
-        Scene scene = new Scene(MainLayout, 800, 600);
+        Scene scene = new Scene(mainLayout, 800, 600);
         stage.setTitle("Synthesizer");
-
-
 
 
         Label freqLabel = new Label("Frequency of Sine wave");
@@ -84,13 +79,6 @@ public class SynthesizerApplication extends Application {
 
 
 
-//        Slider freqSlider = new Slider(20,10000,320);
-//      freqSlider.setOnMouseDragged(e->handleSlider(e,freqSlider, freqLabel));
-//        freqBox.getChildren().add(freqSlider);
-
-       // AudioComponentWidget play = new AudioComponentWidget(new SineWave(440), MainLayout);
-
-
         HBox bottomPanel = new HBox();
         Button playButton = new Button();
         playButton.setPrefSize(50,50);
@@ -102,9 +90,6 @@ public class SynthesizerApplication extends Application {
         mainLayout.setBottom(bottomPanel);
 
 
-
-
-
         MainLayout.getChildren().add(freqBox);
 
 
@@ -112,18 +97,28 @@ public class SynthesizerApplication extends Application {
         stage.show();
     }
 
-
-
+    private void createComponent(javafx.event.ActionEvent e, AnchorPane mainCenter) {
+        AudioComponent sinewave = new SineWave(200);
+        AudioComponentWidget acw = new AudioComponentWidget(sinewave, mainCenter);
+        mainCenter.getChildren().add(acw);
+        widgets.add(acw);
+    }
 
 
     private void playAudio(javafx.event.ActionEvent e) {
         try {
-
             Clip c = AudioSystem.getClip(); // Not our AudioClip class
             AudioFormat format16 = new AudioFormat(44100, 16, 1, true, false);
-            byte[] data = widgets.get(0).ac_.getClip().getData();
+            Mixer mixer = new Mixer();
+            for(AudioComponentWidget w:widgets){
+                AudioComponent ac = w.ac_;
+                mixer.connectInput(ac);
+            }
             // Reads data from our byte array to play it.
-            c.open(format16, data, 0, data.length);
+            //byte[] data = widgets.get(0).ac_.getClip().getData();
+
+            AudioClip clip = mixer.getClip();
+            c.open(format16, clip.getData(), 0, clip.getData().length);
             c.start(); // Actually starts playing the sound.
             AudioListener listener = new AudioListener(c);
             c.addLineListener(listener);
@@ -132,12 +127,7 @@ public class SynthesizerApplication extends Application {
         }
 
     }
-    private void createComponent(ActionEvent e){
-        AudioComponent sinewave = new SineWave(200);
-        AudioComponentWidget acw = new AudioComponentWidget(sinewave, mainCenter);
-        mainCenter.getChildren().add(acw);
-       widgets.add(acw);
-    }
+
 
     public static void main(String[] args) {
         launch();}

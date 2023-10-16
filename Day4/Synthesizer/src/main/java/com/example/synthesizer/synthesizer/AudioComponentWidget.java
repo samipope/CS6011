@@ -1,37 +1,28 @@
-package com.example.synthesizer;
+package com.example.synthesizer.synthesizer;
 
+import com.example.synthesizer.SynthesizerApplication;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-import javax.sound.sampled.AudioFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
 
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class AudioComponentWidget extends Pane {
 
-   AudioComponent ac_;
+   public AudioComponent ac_;
 //   AnchorPane parent_;
    AnchorPane parent_;
 
-   AudioComponentWidget(AudioComponent ac, AnchorPane parent){
+   public AudioComponentWidget(AudioComponent ac, AnchorPane parent){
       ac_=ac;
       parent_=parent;
 
@@ -62,7 +53,7 @@ public class AudioComponentWidget extends Pane {
 
       this.setLayoutX(50);
       this.setLayoutY(50);
-
+//      parent_.getChildren().add(this);
    }
 
    private void setFrequency(javafx.scene.input.MouseEvent e, Slider freqSlider) {
@@ -99,21 +90,11 @@ public class AudioComponentWidget extends Pane {
 
    private void handleSlider(javafx.scene.input.MouseEvent e, Slider freqSlider, Label freqLabel) {
       //play the sound if they press the button
-      double result = freqSlider.getValue();
-      freqLabel.setText("Frequency of Sinewave:  " + result + "Hz");
+      ((SineWave)ac_).setFrequency(freqSlider.getValue());
+      freqLabel.setText("Frequency of Sinewave:  "  + "Hz");
    }
 
 
-
-
-
-
-//    private void createComponent(ActionEvent e){
-//        AudioComponent sinewave = new SineWave(200);
-//        AudioComponentWidget acw = new AudioComponentWidget(sinewave, mainCenter);
-//        mainCenter.getChildren().add(acw);
-//        widgets_.add(acw);
-//    }
 
 
 

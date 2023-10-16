@@ -1,4 +1,4 @@
-package com.example.synthesizer;
+package com.example.synthesizer.synthesizer;
 
 import java.util.Arrays;
 
@@ -34,7 +34,7 @@ public class AudioClip {
 
 
     //returns our array - return a copy, use Arrays/copyOf
-     byte[] getData(){
+    public byte[] getData(){
      byte[] NewData = Arrays.copyOf(audioArray, audioArray.length);
      return NewData;
     }

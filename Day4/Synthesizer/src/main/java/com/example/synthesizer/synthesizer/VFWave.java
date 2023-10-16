@@ -1,6 +1,9 @@
-package com.example.synthesizer;
+package com.example.synthesizer.synthesizer;
 
-public class VFWave implements AudioComponent{
+import com.example.synthesizer.synthesizer.AudioClip;
+import com.example.synthesizer.synthesizer.AudioComponent;
+
+public class VFWave implements AudioComponent {
         AudioComponent input_;
 
 

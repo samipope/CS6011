@@ -1,8 +1,10 @@
-package com.example.synthesizer;
-import java.lang.Math;
-import java.util.ArrayList;
+package com.example.synthesizer.synthesizer;
+import com.example.synthesizer.synthesizer.AudioClip;
+import com.example.synthesizer.synthesizer.AudioComponent;
 
-public class SineWave implements AudioComponent{
+import java.lang.Math;
+
+public class SineWave implements AudioComponent {
     double frequency_;
     double sampleRate = 44100;
 

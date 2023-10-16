@@ -1,6 +1,6 @@
-package com.example.synthesizer;
+package com.example.synthesizer.synthesizer;
+
 import javax.sound.sampled.*;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws LineUnavailableException {

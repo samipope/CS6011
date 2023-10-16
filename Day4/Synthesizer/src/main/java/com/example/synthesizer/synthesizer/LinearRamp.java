@@ -1,4 +1,7 @@
-package com.example.synthesizer;
+package com.example.synthesizer.synthesizer;
+
+import com.example.synthesizer.synthesizer.AudioClip;
+import com.example.synthesizer.synthesizer.AudioComponent;
 
 public class LinearRamp implements AudioComponent {
     float start;
