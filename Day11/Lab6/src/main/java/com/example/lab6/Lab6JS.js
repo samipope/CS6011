@@ -1,17 +1,49 @@
-// Create an "empty" HTML document (file) as seen in class (just the <html>, <head>, and <body> tags). The <body> tag should consist of only a <script> tag. The <script> tag should point at the JavaScript file helloJS.js (that you will also create) in the same directory.
-//
-//     Create an empty html web page and an accompanying JavaScript file (loaded via a <script> tag). Note, you can place these (and edit them) under your CS account web pages, or you can just point your browser directly at a local html file on your laptop.
-//
-//         Display hello world in your HTML page using JavaScript: first use document.writeln(), second use console.log(). What's the difference? Why would you want to use one or the other?
-//
-//         Create an array literal variable (write stuff inside of []) containing a string, a boolean, an int, a floating-point number, and an object.
-//
-//         Print your array using console.log( myArray ).  Now modify it somehow, then print it again. Examine the console output (try "opening" the print out).  What do you notice? You might see weird stuff happen depending on your browser.
-//
-//         Define a function that adds two parameters together. First, use the more C++ style syntax: function f(a, b){ ... }, then use the "function literal" syntax: let myFunction = function( a, b ){ ... }
-//
-//         Which syntax do you prefer? Can you detect any difference between the two ways of declaring functions?
-//
-//         Test your functions using ints, floating point numbers, strings, and a mix of these. What do you observe?
-//
-//         Commit your html and JavaScript files to your git repo.
+
+"use strict";
+
+function mainFunct(){
+
+    //display hello world in two ways
+    document.writeln("Hello World");
+    console.log("Hello world");
+    //the difference between the two is that one shows up in the console which would be a good place ot put notes in for other engineers.
+    //the other one would be good to use if trying to display to a user.
+
+    //Create an array literal variable (write stuff inside of []) containing a string, a boolean, an int, a floating-point number, and an object.
+    let anArray = [3,3.4,'hello',true];
+    for(let elem of anArray){
+        console.log("Element: ", elem);
+    }
+    //modify the array somehow and print it again
+    anArray[0]=0;
+    for(let elem of anArray){
+        console.log("Element: ", elem);
+    }
+//I used safari and didn't notice anything strange. it changed the first thing in my array to a 0 and reprinted it into the console
+
+
+    //define a function that adds two parameters together
+    //C++ syntax stlye
+    function add(a,b){
+        let c;
+        c=a+b;
+    }
+    //java style
+    let myAdd = function(a,b){let c=a+b;}
+
+    //i prefer the C++ syntax because i am more used to it. i think the java syntax does look more condensed
+    //i also like that C++ return is very clearly outlined
+
+    let x =add(3,4);
+    x===7;
+
+
+
+
+
+
+
+
+}
+
+window.onload = mainFunct();

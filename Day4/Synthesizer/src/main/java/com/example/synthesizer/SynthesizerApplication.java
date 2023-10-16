@@ -32,7 +32,9 @@ import javafx.scene.shape.Circle;
 
 public class SynthesizerApplication extends Application {
     AnchorPane mainCenter;
+    public static Circle speaker;
     public static ArrayList<AudioComponentWidget> widgets = new ArrayList<>();
+    public static ArrayList<AudioComponentWidget> connectedWidgets = new ArrayList<>();
     @Override
     public void start(Stage stage) throws IOException {
 
@@ -43,7 +45,7 @@ public class SynthesizerApplication extends Application {
         //center panel
         AnchorPane mainCenter = new AnchorPane();
         mainCenter.setStyle("-fx-background-color: pink");
-        Circle speaker = new Circle(400,200,15);
+        speaker = new Circle(400,200,15);
         speaker.setFill(Color.BLACK);
         //right panel
         VBox rightpanel = new VBox();
@@ -110,7 +112,7 @@ public class SynthesizerApplication extends Application {
             Clip c = AudioSystem.getClip(); // Not our AudioClip class
             AudioFormat format16 = new AudioFormat(44100, 16, 1, true, false);
             Mixer mixer = new Mixer();
-            for(AudioComponentWidget w:widgets){
+            for(AudioComponentWidget w:connectedWidgets){
                 AudioComponent ac = w.ac_;
                 mixer.connectInput(ac);
             }

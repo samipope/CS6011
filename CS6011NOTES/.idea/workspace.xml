@@ -5,20 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc40663b-d330-43bd-ba8b-4136a081fd6a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/cs6011notes/oct16.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/cs6011notes/oct16.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/AudioClip.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioClip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/AudioComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/AudioComponentWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioComponentWidget.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/AudioListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/LinearRamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/LinearRamp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/Mixer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/Mixer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/SineWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/SineWave.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day11/Lab6/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day11/Lab6/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day11/Lab6/src/main/java/Lab6HTML.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Day11/Lab6/src/main/java/com/example/lab6/Lab6HTML.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day11/Lab6/src/main/java/com/example/lab6/Lab6JS.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Day11/Lab6/src/main/java/com/example/lab6/Lab6JS.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/SynthesizerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/SynthesizerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/VFWave.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/VFWave.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/VolumeAdjuster.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/VolumeAdjuster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioComponentWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioComponentWidget.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,28 +28,28 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2WqvETwFuhSgAwZBUSzzwI7mwBA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -67,6 +59,8 @@
       <option name="presentableId" value="Default" />
       <updated>1697472812889</updated>
       <workItem from="1697472813896" duration="2807000" />
+      <workItem from="1697485751909" duration="255000" />
+      <workItem from="1697487428123" duration="7000" />
     </task>
     <servers />
   </component>
