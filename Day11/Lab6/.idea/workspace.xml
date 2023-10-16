@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="65b0fa38-8bf6-48fa-becf-a837c3def07a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../CS6011NOTES/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../CS6011NOTES/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Lab6HTML.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab6/Lab6HTML.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/lab6/Lab6JS.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/lab6/Lab6JS.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day4/Synthesizer/src/main/java/com/example/synthesizer/SynthesizerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day4/Synthesizer/src/main/java/com/example/synthesizer/SynthesizerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioComponentWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioComponentWidget.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +62,7 @@
       <workItem from="1697485599281" duration="149000" />
       <workItem from="1697485774892" duration="1534000" />
       <workItem from="1697487453327" duration="122000" />
+      <workItem from="1697487735578" duration="543000" />
     </task>
     <servers />
   </component>

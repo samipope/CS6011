@@ -29,13 +29,23 @@ function mainFunct(){
         c=a+b;
     }
     //java style
-    let myAdd = function(a,b){let c=a+b;}
+    let myAdd = function(a,b){return a+b;}
 
     //i prefer the C++ syntax because i am more used to it. i think the java syntax does look more condensed
     //i also like that C++ return is very clearly outlined
 
-    let x =add(3,4);
-    x===7;
+
+    //test the function with ints and strings
+    let x = myAdd(3,4);
+    document.writeln("this should be 7" + x);
+    let y = myAdd(5,9);
+    document.writeln("this should be 14" + y);
+
+    let z = myAdd("this","that");
+    document.writeln(z);
+
+
+
 
 
 
