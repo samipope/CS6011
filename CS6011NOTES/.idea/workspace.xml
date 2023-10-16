@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dc40663b-d330-43bd-ba8b-4136a081fd6a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../Day11/Lab7/src/main/java/com/example/lab7/Lab7.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Day11/Lab7/src/main/java/com/example/lab7/myPageBuilder.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day11/Lab6/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Day11/Lab6/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day11/Lab6/src/main/java/Lab6HTML.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Day11/Lab6/src/main/java/com/example/lab6/Lab6HTML.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day11/Lab6/src/main/java/com/example/lab6/Lab6JS.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Day11/Lab6/src/main/java/com/example/lab6/Lab6JS.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/SynthesizerApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/SynthesizerApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioComponentWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioComponentWidget.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +58,9 @@
       <workItem from="1697472813896" duration="2807000" />
       <workItem from="1697485751909" duration="255000" />
       <workItem from="1697487428123" duration="7000" />
+      <workItem from="1697489778691" duration="53000" />
+      <workItem from="1697489848254" duration="304000" />
+      <workItem from="1697490176077" duration="48000" />
     </task>
     <servers />
   </component>
