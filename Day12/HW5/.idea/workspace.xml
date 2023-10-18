@@ -5,22 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="51c62bf8-71cd-4c82-809b-5af3f3e14841" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../Lab8/src/main/java/com/example/lab8/Lab8.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab8/src/main/java/com/example/lab8/script.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Lab8/src/main/java/com/example/lab8/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../CS6011NOTES/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../CS6011NOTES/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hw5/hw5.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/hw5/sorting.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day4/Synthesizer/src/main/java/com/example/synthesizer/MixerWidget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../Day4/Synthesizer/src/main/java/com/example/synthesizer/synthesizer/AudioComponentWidget.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../Day4/Synthesizer/src/main/java/com/example/synthesizer/AudioComponentWidget.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2WsU4nICvPRw3rBusatOgVsXDbJ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -28,10 +36,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -44,6 +57,7 @@
       <option name="presentableId" value="Default" />
       <updated>1697520592700</updated>
       <workItem from="1697520593903" duration="142000" />
+      <workItem from="1697638280995" duration="1368000" />
     </task>
     <servers />
   </component>

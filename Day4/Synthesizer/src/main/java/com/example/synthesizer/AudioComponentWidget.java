@@ -1,6 +1,9 @@
-package com.example.synthesizer.synthesizer;
+package com.example.synthesizer;
 
-import com.example.synthesizer.SynthesizerApplication;
+import com.example.synthesizer.synthesizer.AudioComponent;
+import com.example.synthesizer.synthesizer.Mixer;
+import com.example.synthesizer.synthesizer.SineWave;
+import com.example.synthesizer.synthesizer.VolumeAdjuster;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
