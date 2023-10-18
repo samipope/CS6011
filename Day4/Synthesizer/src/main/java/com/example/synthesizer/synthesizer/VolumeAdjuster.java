@@ -7,7 +7,7 @@ public class VolumeAdjuster implements AudioComponent {
    private AudioComponent input;
     public float scale;
 
-    VolumeAdjuster(float scale) {
+    public VolumeAdjuster(float scale) {
         this.scale = scale;
     }
 

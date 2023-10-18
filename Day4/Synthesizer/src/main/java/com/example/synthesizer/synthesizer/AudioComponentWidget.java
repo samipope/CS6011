@@ -20,15 +20,16 @@ import javafx.scene.shape.Line;
 import javafx.geometry.Bounds;
 
 public class AudioComponentWidget extends Pane {
-
    public AudioComponent ac_;
 //   AnchorPane parent_;
    AnchorPane parent_;
    double mouseXpos, mouseYpos, widgetXpos, widgetYpos;
 
+   static Circle input_;
+
    Line line_;
 
-   public AudioComponentWidget(AudioComponent ac, AnchorPane parent){
+   public AudioComponentWidget(SineWave ac, AnchorPane parent){
       ac_=ac;
       parent_=parent;
 
@@ -36,17 +37,17 @@ public class AudioComponentWidget extends Pane {
       Label baselayoutlabel = new Label("SineWave");
       baseLayout.setStyle("-fx-border-color: black; -fx-border-image-width: 5 ");
       VBox rightSide = new VBox();
+
+
       Button closeBtn=new Button("x");
       closeBtn.setOnAction(e->closeWidget(e));
       Circle output = new Circle(10);
-      output.setFill(Color.AQUA);
+      output.setFill(Color.GRAY);
 
       //handle drawing the line
       output.setOnMousePressed(e->startConn(e,output));
       output.setOnMouseDragged(e->moveConn(e, output));
       output.setOnMouseReleased(e->endConn(e,output));
-
-
 
       rightSide.getChildren().add(closeBtn);
       rightSide.getChildren().add(output);
@@ -54,15 +55,15 @@ public class AudioComponentWidget extends Pane {
       rightSide.setAlignment(Pos.CENTER);
       rightSide.setPadding(new Insets(5));
       rightSide.setSpacing(5);
+
       //left side
       VBox leftside = new VBox();
       Label freqLabel = new Label("SineWave");
-      Slider freqSlider = new Slider(200, 400, 300);
+      Slider freqSlider = new Slider(200, 1000, 300);
       leftside.getChildren().add(freqLabel);
       leftside.getChildren().add(freqSlider);
       leftside.setOnMousePressed(e->getPosInf(e));
       leftside.setOnMouseDragged(e->moveWidget(e));
-
 
       freqSlider.setOnMouseDragged(e->setFrequency(e, freqSlider, freqLabel));
       baseLayout.getChildren().add(freqSlider);//to check it later on
@@ -72,8 +73,117 @@ public class AudioComponentWidget extends Pane {
 
       this.setLayoutX(50);
       this.setLayoutY(50);
-//      parent_.getChildren().add(this);
    }
+
+
+   public AudioComponentWidget(Mixer ac, AnchorPane parent){
+      ac_=ac;
+      parent_=parent;
+
+      HBox baseLayout=new HBox();
+      Label baselayoutlabel = new Label("Mixer");
+      baseLayout.getChildren().add(baselayoutlabel);
+      baseLayout.setStyle("-fx-border-color: #7cf6ec; -fx-border-image-width: 10 ");
+      VBox rightSide = new VBox();
+
+
+      Button closeBtn=new Button("x");
+      closeBtn.setOnAction(e->closeWidget(e));
+      Circle output = new Circle(10);
+      output.setFill(Color.GRAY);
+
+      Circle input = new Circle(10);
+      input.setFill(Color.BLACK);
+      input_ =input;
+
+
+      //handle drawing the line for output
+      output.setOnMousePressed(e->startConn(e,output));
+      output.setOnMouseDragged(e->moveConn(e, output));
+      output.setOnMouseReleased(e->endConn(e,output));
+
+      input.setOnMouseReleased(e->endConn(e,input));
+
+      rightSide.getChildren().add(closeBtn);
+      rightSide.getChildren().add(output);
+      rightSide.getChildren().add(input);
+
+      rightSide.setAlignment(Pos.CENTER);
+      rightSide.setPadding(new Insets(5));
+      rightSide.setSpacing(5);
+
+
+      VBox leftside = new VBox();
+      Label dragginglabel = new Label("O");
+      leftside.getChildren().add(dragginglabel);
+
+      leftside.setOnMousePressed(e->getPosInf(e));
+      leftside.setOnMouseDragged(e->moveWidget(e));
+
+      baseLayout.getChildren().add(rightSide);
+      baseLayout.getChildren().add(leftside);
+      this.getChildren().add(baseLayout);
+
+      this.setLayoutX(50);
+      this.setLayoutY(50);
+   }
+
+   public AudioComponentWidget(VolumeAdjuster ac, AnchorPane parent) {
+      ac_ = ac;
+      parent_ = parent;
+
+      HBox baseLayout = new HBox();
+      Label baselayoutlabel = new Label("Volume");
+      baseLayout.getChildren().add(baselayoutlabel);
+      baseLayout.setStyle("-fx-border-color: #7cf6ec; -fx-border-image-width: 10 ");
+      VBox rightSide = new VBox();
+
+      Button closeBtn = new Button("x");
+      closeBtn.setOnAction(e -> closeWidget(e));
+      Circle output = new Circle(10);
+      output.setFill(Color.GRAY);
+      Circle input = new Circle(10);
+      input.setFill(Color.BLACK);
+      input_ =input;
+
+      //handle drawing the line for output/input
+      output.setOnMousePressed(e -> startConn(e, output));
+      output.setOnMouseDragged(e -> moveConn(e, output));
+      output.setOnMouseReleased(e -> endConn(e, output));
+      input.setOnMouseReleased(e -> endConn(e, input));
+
+      rightSide.getChildren().add(closeBtn);
+      rightSide.getChildren().add(output);
+      rightSide.getChildren().add(input);
+
+      rightSide.setAlignment(Pos.CENTER);
+      rightSide.setPadding(new Insets(5));
+      rightSide.setSpacing(5);
+
+      //left side to make dragging the widget easier
+      VBox leftside = new VBox();
+      Label dragginglabel = new Label("O");
+      leftside.getChildren().add(dragginglabel);
+
+      Slider volumeSlider = new Slider(0, 5, 30);
+      leftside.getChildren().add(volumeSlider);
+      leftside.setOnMousePressed(e->getPosInf(e));
+      leftside.setOnMouseDragged(e->moveWidget(e));
+
+
+      volumeSlider.setOnMouseDragged((e->setVolume(e,volumeSlider)));
+      //freqSlider.setOnMouseDragged(e->setFrequency(e, freqSlider, freqLabel));
+      baseLayout.getChildren().add(volumeSlider);//to check it later on
+      baseLayout.getChildren().add(leftside);
+      baseLayout.getChildren().add(rightSide);
+      this.getChildren().add(baseLayout);
+
+      this.setLayoutX(50);
+      this.setLayoutY(50);
+
+   }
+
+
 
    private void moveConn(MouseEvent e, Circle output) {
       Bounds parentBounds = parent_.getBoundsInParent();
@@ -83,9 +193,10 @@ public class AudioComponentWidget extends Pane {
    }
 
    private void startConn(MouseEvent e, Circle output) {
-      if(line_!=null){
+      if (line_ != null) {
          parent_.getChildren().remove(line_);
       }
+
       line_ = new Line();
       Bounds parentBounds = parent_.getBoundsInParent();
       Bounds bounds = output.localToScene(output.getBoundsInLocal());
@@ -94,11 +205,10 @@ public class AudioComponentWidget extends Pane {
       line_.setStartX(bounds.getCenterX() - parentBounds.getMinX());
       line_.setStartY(bounds.getCenterY() - parentBounds.getMinY());
 
-      line_.setEndX((e.getSceneX()));
+      line_.setEndX(e.getSceneX());
       line_.setEndY(e.getSceneY());
 
       parent_.getChildren().add(line_);
-
 
    }
 
@@ -108,13 +218,20 @@ public class AudioComponentWidget extends Pane {
       double distance = Math.sqrt(Math.pow(speakerBounds.getCenterX()-e.getSceneX(),2.0)+Math.pow(speakerBounds.getCenterY() - e.getSceneY(),2.0));
       if (distance <10){
          SynthesizerApplication.connectedWidgets.add(this);
-      }
-      else{
-         parent_.getChildren().remove(line_);
-         line_=null;
+      } else{
+         Circle input = AudioComponentWidget.input_;
+         Bounds inputBounds = input.localToScene((input.getBoundsInLocal()));
+         double inputDistance = Math.sqrt(Math.pow(inputBounds.getCenterX()-e.getSceneX(),2.0)+Math.pow(inputBounds.getCenterY() - e.getSceneY(),2.0));
+         if(inputDistance<10){
+            SynthesizerApplication.connectedWidgets.add(this);
+         } else {
+            parent_.getChildren().remove(line_);
+            line_=null;
+         }
       }
 
-   }
+      }
+
 
    private void moveWidget(MouseEvent e) {
       double delX = e.getSceneX() - mouseXpos;
@@ -135,6 +252,19 @@ public class AudioComponentWidget extends Pane {
       frequencyLabel.setText("SineWave" + value + "Hz");
    }
 
+
+
+
+   public float setVolume(MouseEvent e, Slider volumeSlider) {
+//      VolumeAdjuster adjuster = new VolumeAdjuster((float) volumeSlider.getValue());
+//      adjuster.connectInput((SineWave)this.ac_);
+
+       float volume = (float) volumeSlider.getValue();
+       return volume;
+   }
+
+
+
    private void closeWidget(javafx.event.ActionEvent e) {
       parent_.getChildren().remove(this);
       SynthesizerApplication.widgets.remove(this);
@@ -145,34 +275,11 @@ public class AudioComponentWidget extends Pane {
 
 
 
-
-
-
-
-//   private void playAudio(javafx.event.ActionEvent e, AudioComponent ac) {
-//      try {
-//         AudioFormat format16 = new AudioFormat(44100, 16, 1, true, false);
-//         Clip c = AudioSystem.getClip(); // Not our AudioClip class
-//         AudioListener listener = new AudioListener(c);
-//         byte[] data = ac.getClip().getData();
-//         // Reads data from our byte array to play it.
-//         c.open(format16, data, 0, data.length);
-//         c.start(); // Actually starts playing the sound.
-//         // Don’t end the program until the sound finishes playing...
-//         c.addLineListener(listener);
-//      } catch (LineUnavailableException k) {
-//         //System.out.println(k.getMessage());
-//      }
-//
-//   }
-
    private void handleSlider(javafx.scene.input.MouseEvent e, Slider freqSlider, Label freqLabel) {
       //play the sound if they press the button
       ((SineWave)ac_).setFrequency(freqSlider.getValue());
       freqLabel.setText("Frequency of Sinewave:  "  + "Hz");
    }
-
-
 
 
 

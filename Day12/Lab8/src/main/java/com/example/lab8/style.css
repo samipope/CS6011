@@ -1,0 +1,35 @@
+/* styles.css */
+table {
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: center;
+}
+
+.highlighted {
+    background-color: yellow;
+}
+
+.clicked {
+    background-color: lightgreen;
+}
+
+/* styles.css */
+.background-animation {
+    animation: background-color-animation 5s linear infinite alternate;
+}
+
+@keyframes background-color-animation {
+    0% {
+        background-color: blue;
+    }
+    50% {
+        background-color: purple;
+    }
+    100% {
+        background-color: red;
+    }
+}
