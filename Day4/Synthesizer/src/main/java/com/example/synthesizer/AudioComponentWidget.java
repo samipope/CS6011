@@ -259,6 +259,7 @@ public class AudioComponentWidget extends Pane {
 
 
    public float setVolume(MouseEvent e, Slider volumeSlider) {
+      //sinewave connect input will not work
 //      VolumeAdjuster adjuster = new VolumeAdjuster((float) volumeSlider.getValue());
 //      adjuster.connectInput((SineWave)this.ac_);
 
