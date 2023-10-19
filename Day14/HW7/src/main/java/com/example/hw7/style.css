@@ -1,0 +1,12 @@
+body {
+    background-color: lightskyblue;
+}
+
+button {
+    width: fit-content;
+}
+
+table {
+    padding: 60px;
+    border-spacing: 10px;
+}
