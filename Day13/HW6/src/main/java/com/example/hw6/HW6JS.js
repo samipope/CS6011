@@ -14,14 +14,6 @@ honeyImg.yPos = 10;
 
 let youLost = false;
 
-// if (youLost===true){
-//     let gameOverIMG = new Image();
-//     gameOverIMG.src = "gameover.jpg";
-//     gameOverIMG.xPos=0;
-//     gameOverIMG.yPos=0;
-//     //add layer on top of the previous image
-//     context.drawImage(gameOverIMG,gameOverIMG.xPos,gameOverIMG.yPos,1200,1200);
-// }
 
 
 let beeIMG = new Image();
@@ -80,7 +72,7 @@ function animateImg(callbackfn, thisArg){
     eraseOld();
 
 
-    if (youLost===true){
+    if (youLost){
         let gameOverIMG = new Image();
         gameOverIMG.src = "gameover.jpg";
         gameOverIMG.xPos=0;
@@ -90,7 +82,7 @@ function animateImg(callbackfn, thisArg){
     }
     else {
         context.drawImage(honeyImg, honeyImg.xPos, honeyImg.yPos, 100, 100);
-        for (let i = 1; i < imgArray.length; i++) {
+        for (let i = 0; i < imgArray.length; i++) {
 
             context.drawImage(imgArray[i], imgArray[i].xPos, imgArray[i].yPos, 100, 100);
 

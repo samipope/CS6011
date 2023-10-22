@@ -1,8 +1,6 @@
-"use script"
+"use strict"
 
-
-
-//my "compare" variable that gets passed in allows the user to define how they would like the data sorted
+//find min location func
 function findMinLocation(arr, start, compare) {
     let minIndex = start;
     for (let i = start + 1; i < arr.length; i++) {
@@ -13,6 +11,7 @@ function findMinLocation(arr, start, compare) {
     return minIndex;
 }
 
+//sort the selection
 function selectionSort(arr, compare) {
     for (let i = 0; i < arr.length - 1; i++) {
         const minIndex = findMinLocation(arr, i, compare);
