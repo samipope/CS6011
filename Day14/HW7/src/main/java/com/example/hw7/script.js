@@ -38,12 +38,13 @@ function handleKeyPress(event) {
             return;
         }
         if (isNaN(y)) {
-            alert("Y should be a number!");
-            yValue.value = "Enter a number";
+            alert("chatroom name should be all lowercase letters");
+            yValue.value = "Enter a valid chatroom name";
             yValue.select();
             return;
         }
         if (wsOpen) {
+            //TODO add in some stuff here
             ws.send(x + " " + y);
         } else {
             resultInput.value = "could not open the websocket";

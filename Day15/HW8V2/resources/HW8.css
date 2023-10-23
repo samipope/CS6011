@@ -1,5 +1,5 @@
 body {
-    background-color: #83ce83;
+    background-color: #ffffff;
 }
 
 button {
@@ -7,6 +7,7 @@ button {
 }
 
 table {
-    padding: 60px;
+    background-color: #a3d3a3;
+    padding: 20px;
     border-spacing: 10px;
 }
