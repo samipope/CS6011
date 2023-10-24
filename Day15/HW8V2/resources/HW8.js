@@ -58,7 +58,6 @@ function sendMessage() {
     if(!wsOpen){
         //allows a person to leave the chatroom
         ws.send('leave' + usernameValue);
-        //TODO print: user has left the chat
     }
 }
 
@@ -71,8 +70,10 @@ ws.onmessage = function (event) {
     if (msgObj.type === 'join') {
         let peoplePar = document.getElementById("People");
         let pplElement = document.createElement("x");
-        pplElement.textContent = msgObj.user + " has joined the chat\n";
+        pplElement.textContent = msgObj.user + " has joined the chat";
+        let linebreak = document.createElement("br");
         peoplePar.appendChild(pplElement);
+        peoplePar.appendChild(linebreak);
     } else if (msgObj.type === 'message') {
         let messagePar = document.getElementById("Messages");
         let msgElement = document.createElement("p");
@@ -82,7 +83,7 @@ ws.onmessage = function (event) {
     else if (msgObj.type ==='leave'){
         let peoplePar = document.getElementById("People");
         let pplLeftElement = document.createElement("l");
-        pplLeftElement.textContent = msgObj.user + "has left the chat\n";
+        pplLeftElement.textContent = msgObj.user + "has left the chat";
         peoplePar.appendChild(pplLeftElement);
     }
 };
