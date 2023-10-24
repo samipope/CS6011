@@ -2,6 +2,19 @@
 <html>
 <head>
   <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    @keyframes backgroundGradient {
+      0% { background: linear-gradient(to right, #FF5733, #6B4226); }
+      25% { background: linear-gradient(to right, #6B4226, #265DFF); }
+      50% { background: linear-gradient(to right, #265DFF, #33FF57); }
+      75% { background: linear-gradient(to right, #33FF57, #FF5733); }
+      100% { background: linear-gradient(to right, #FF5733, #6B4226); }
+    }
+
+    .background-animation {
+      animation: backgroundGradient 10s linear infinite;
+    }
+  </style>
 </head>
 <body>
 <table id="multiplication-table">
@@ -26,4 +39,6 @@
 <p id="toggle-background">Click here to toggle background color</p>
 </body>
 <script src="script.js"></script>
+
+
 </html>
