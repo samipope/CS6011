@@ -11,7 +11,6 @@ public class Main {
                     Socket client = server.accept();
                     Thread clientThread = new Thread(new ClientHandler(client));
                     clientThread.start();
-//                    Thread.sleep(5);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

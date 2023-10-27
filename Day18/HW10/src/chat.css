@@ -1,0 +1,18 @@
+body {
+    background-color: #ffffff;
+}
+
+button {
+    width: fit-content;
+}
+
+#Messages{
+    background-color: #73cb73;
+}
+
+table {
+    padding: 10px;
+    border-spacing: 10px;
+    border: 1px;
+    border-color: black;
+}

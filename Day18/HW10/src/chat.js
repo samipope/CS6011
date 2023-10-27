@@ -26,20 +26,24 @@ ws.onopen = function () {
     wsOpen = true;
 };
 
-// function handleKeyPress(event) {
-//     if (event.key === "Enter") {
-//         // get value of chatroom
-//         if (event.target === chatroom) {
-//             const chatroomValue = chatroom.value;
-//             // check that chatroom is within range, if not give error
-//             if ('a' >= chatroomValue && chatroomValue <= 'z') {
-//                 alert("Chatroom should be all lowercase!");
-//                 chatroom.value = "Enter a valid chatroom ID";
-//                 chatroom.select();
-//             }
-//         }
-//     }
-// }
+
+//TODO make the check for only capital letters work again!!!
+
+
+function handleKeyPress(event) {
+    if (event.key === "Enter") {
+        // get value of chatroom
+        if (event.target === chatroom) {
+            const chatroomValue = chatroom.value;
+            // check that chatroom is within range, if not give error
+            if ('a' >= chatroomValue && chatroomValue <= 'z') {
+                alert("Chatroom should be all lowercase!");
+                chatroom.value = "Enter a valid chatroom ID";
+                chatroom.select();
+            }
+        }
+    }
+}
 
 
 const chatroomValue = chatroom.value;
@@ -68,7 +72,7 @@ function sendMessage() {
     }
     if(!wsOpen){
         //allows a person to leave the chatroom
-        ws.send('leave' + usernameValue);
+        ws.send('leave ' + usernameValue);
     }
 }
 
@@ -85,13 +89,13 @@ function joinRoom() {
     }
     if(!wsOpen){
         //allows a person to leave the chatroom
-        ws.send('leave' + username.value);
+        ws.send('leave ' + username.value);
     }
 }
 
 
 function leaveRoom() {
-    ws.send('leave' + username.value);
+    ws.send('leave ' + username.value);
 }
 
 

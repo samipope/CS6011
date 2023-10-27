@@ -31,6 +31,8 @@ class ClientHandler implements Runnable {
         @Override
         public void run() {
             try {
+
+                Thread.sleep(1000);
                     HttpRequestHandler request = new HttpRequestHandler( client );
 
                     String resource_dir = "/Users/samanthapope/6011GitHub/CS6011/Day17/HW9/src";

@@ -1,4 +1,4 @@
-package com.example.synthesizerproject;
+package com.example.synthesizer.synthesizer;
 import com.example.synthesizer.synthesizer.AudioComponent;
 import com.example.synthesizer.synthesizer.VolumeAdjuster;
 import javafx.scene.control.Button;

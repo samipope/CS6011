@@ -18,7 +18,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class SineWaveWidget extends com.example.synthesizerproject.AudioComponentWidget {
+public class SineWaveWidget extends AudioComponentWidget {
 
     static Slider freqSlider;
 
@@ -40,7 +40,7 @@ public class SineWaveWidget extends com.example.synthesizerproject.AudioComponen
         leftSide.getChildren().add(frequencyLabel);
         freqSlider = new Slider(50, 2000, 300);
         freqSlider.setOnMouseDragged(this::handleSlider);
-        freqSlider.setStyle("-fx-color: #F18DBC");
+        freqSlider.setStyle("-fx-color: #85c9e3");
         freqSlider.setShowTickLabels(true);
         freqSlider.setShowTickMarks(true);
         leftSide.getChildren().add(freqSlider); //to check it later on

@@ -1,16 +1,9 @@
-package com.example.synthesizerproject;
+package com.example.synthesizer.synthesizer;
 //From the Main
-import javax.sound.sampled.*;
 
-import com.example.synthesizer.synthesizer.AudioComponent;
-import com.example.synthesizer.synthesizer.SineWave;
-import com.example.synthesizer.synthesizer.VolumeAdjuster;
 import javafx.application.Application;
 import javafx.scene.input.MouseEvent;
-import java.io.FileInputStream;
 import javafx.geometry.Bounds;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -24,31 +17,13 @@ import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.ArrayList;
-import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.geometry.Bounds;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-import javafx.scene.layout.AnchorPane;
 
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
-import javax.swing.*;
-import java.io.IOException;
-import java.util.ArrayList;
 
-public class SynthesizeApplication extends Application {
+public class SynthesizerApplication extends Application {
 
     AnchorPane mainCenter;
     public static Circle speaker;
@@ -64,51 +39,41 @@ public class SynthesizeApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        mixer = new Mixer();
+       com.example.synthesizer.synthesizer.Mixer mixer = new Mixer();
         BorderPane mainLayout = new BorderPane();
 
         //Right Panel
         VBox rightpanel = new VBox();
-        rightpanel.setStyle("-fx-background-color: #F18DBC");
+        rightpanel.setStyle("-fx-background-color: #159cda");
         rightpanel.setPadding(new Insets(4));
         rightpanel.setSpacing(10);
-        Image image = new Image(new FileInputStream("/Users/lindsayhaslam/CS6011/Day6/Barbie.png"));
 
-        //Setting the image view
-        ImageView imageView = new ImageView(image);
-        double bottomY = rightpanel.getHeight() - imageView.getFitHeight();
-
-        //setting the fit height and width of the image view
-        imageView.setFitHeight(40);
-        imageView.setFitWidth(80);
-        rightpanel.getChildren().add(imageView);
-        imageView.setY(bottomY);
 
         //SineWave Button
         Button sinewaveBtn = new Button("SineWave");
-        sinewaveBtn.setStyle("-fx-background-color: #FFECF6; -fx-text-fill: #E0218A; -fx-border-color: white; -fx-border-width: 2px; -fx-font-family: 'Comic Sans MS'; -fx-font-weight: bold; -fx-font-size: 14;");
-        sinewaveBtn.setOnAction(this::createComponent);
+        sinewaveBtn.setStyle("-fx-background-color: #FFECF6; -fx-text-fill: #85c9e3; -fx-border-color: #159cda; -fx-border-width: 2px; -fx-font-family: 'Comic Sans MS'; -fx-font-weight: bold; -fx-font-size: 14;");
+        sinewaveBtn.setOnAction(this::createSinewave);
         rightpanel.getChildren().add(sinewaveBtn);
 
         //Volume Button
         Button volumeBtn = new Button("Volume");
-        volumeBtn.setStyle("-fx-background-color: #FFECF6; -fx-text-fill: #E0218A; -fx-border-color: white; -fx-border-width: 2px; -fx-font-family: 'Comic Sans MS'; -fx-font-weight: bold; -fx-font-size: 14;");
+        volumeBtn.setStyle("-fx-background-color: #FFECF6; -fx-text-fill: #85c9e3; -fx-border-color: #159cda; -fx-border-width: 2px; -fx-font-family: 'Comic Sans MS'; -fx-font-weight: bold; -fx-font-size: 14;");
         volumeBtn.setOnAction(this::createVolume);
         rightpanel.getChildren().add(volumeBtn);
 
         //Linear Ramp Button
         Button mixerBtn = new Button("Mixer");
-        mixerBtn.setStyle("-fx-background-color: #FFECF6; -fx-text-fill: #E0218A; -fx-border-color: white; -fx-border-width: 2px; -fx-font-family: 'Comic Sans MS'; -fx-font-weight: bold; -fx-font-size: 14;");
-        mixerBtn.setOnAction(this::createComponent);
+        mixerBtn.setStyle("-fx-background-color: #FFECF6; -fx-text-fill: #85c9e3; -fx-border-color: #159cda; -fx-border-width: 2px; -fx-font-family: 'Comic Sans MS'; -fx-font-weight: bold; -fx-font-size: 14;");
+        mixerBtn.setOnAction(this::createMixer);
         rightpanel.getChildren().add(mixerBtn);
 
         //Center Panel
         mainCenter = new AnchorPane();
-        mainCenter.setStyle("-fx-background-color: #F7B9D7");
+        mainCenter.setStyle("-fx-background-color: #000000");
 
         //Define speaker so other classes can access it
         speaker = new Circle(400, 200, 15);
-        speaker.setStyle("-fx-fill: #E0218A");
+        speaker.setStyle("-fx-fill: #cbd3cb");
         mainCenter.getChildren().add(speaker);
 
         //Adding the AnchorPane's to the layout
@@ -120,7 +85,7 @@ public class SynthesizeApplication extends Application {
         bottomPanel.setStyle("-fx-background-color: #FFECF6");
         bottomPanel.setAlignment(Pos.CENTER);
         Button playBtn=new Button("⫸");
-        playBtn.setStyle("-fx-background-color: #F18DBC; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 2px;");
+        playBtn.setStyle("-fx-background-color: #159cda; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 2px;");
         playBtn.setOnAction(this::playAudio);
         bottomPanel.getChildren().add(playBtn);
         mainLayout.setBottom(bottomPanel);
@@ -132,20 +97,20 @@ public class SynthesizeApplication extends Application {
         stage.show();
     }
 
-    private void playAudio(ActionEvent e) {
-        //ATTEMPT OF NABIL'S CODE
-        try{
-            Clip c = AudioSystem.getClip();
+    private void playAudio(javafx.event.ActionEvent e) {
+        try {
+            Clip c = AudioSystem.getClip(); // Not our AudioClip class
             AudioFormat format16 = new AudioFormat(44100, 16, 1, true, false);
-//            mixer = new Mixer();
-//            for (AudioComponentWidget w:connectedWidgets){
-//                AudioComponent audioComponent = w.getAudioComponent();
-//                mixer.connectInput(audioComponent);
-//
-//            }
+            // Remove this line, so you don't shadow the class-level mixer
+            Mixer mixer = new Mixer();
+            for(AudioComponentWidget w:connectedWidgets){
+                AudioComponent ac = w.ac_;
+                mixer.connectInput(ac);
+            }
+
             AudioClip clip = mixer.getClip();
             c.open(format16, clip.getData(), 0, clip.getData().length);
-            c.start();
+            c.start(); // Actually starts playing the sound.
             AudioListener listener = new AudioListener(c);
             c.addLineListener(listener);
         } catch (LineUnavailableException k) {
@@ -153,7 +118,7 @@ public class SynthesizeApplication extends Application {
         }
     }
 
-    private void createComponent(ActionEvent e) {
+    private void createSinewave(ActionEvent e) {
         int frequency = 200;
         AudioComponent sineWave = new SineWave(frequency);
         sineWaves.add((SineWave) sineWave);
@@ -170,13 +135,14 @@ public class SynthesizeApplication extends Application {
         widgets.add(vw);
     }
 
-//    private void createMixer(ActionEvent e) {
-//        MixerWidget mixer = new MixerWidget();
-//        // Add the VolumeAdjusterWidget to the mainCenter AnchorPane
-//        mainCenter.getChildren().add(mixer);
-//        // Add the widget to your list of widgets (if needed)
-//        widgets.add(mixer);
-//    }
+    private void createMixer(ActionEvent e) {
+        AudioComponent mixer = new Mixer();
+        MixerWidget vw = new MixerWidget(mixer, mainCenter);
+        mainCenter.getChildren().add(vw);
+        widgets.add(vw);
+    }
+
+
 
     public static AudioComponentWidget findClosestConnectable(MouseEvent e){
         for(AudioComponentWidget acw:widgets){
@@ -189,10 +155,6 @@ public class SynthesizeApplication extends Application {
         return null;
     }
 
-
-    public static void connectToSpeaker(AudioComponent ac){
-        mixer.connectInput(ac);
-    }
     public static void main (String[]args){
         launch();
     }

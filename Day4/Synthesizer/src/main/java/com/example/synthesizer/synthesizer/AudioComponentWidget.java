@@ -1,5 +1,4 @@
-package com.example.synthesizerproject;
-import com.example.synthesizer.synthesizer.AudioComponent;
+package com.example.synthesizer.synthesizer;
 import javafx.event.ActionEvent;
 import javafx.geometry.Bounds;
 import javafx.geometry.Insets;
@@ -17,6 +16,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+
+//import static com.example.synthesizer.synthesizer.SynthesizerApplication.connectToSpeaker;
 
 public class AudioComponentWidget extends Pane {
     public AudioComponent ac_;
@@ -42,7 +43,7 @@ public class AudioComponentWidget extends Pane {
         ac_ = ac;
         parent_ = parent;
         baseLayout = new HBox();
-        baseLayout.setStyle("-fx-background-color: #FFECF6; -fx-border-color: white; -fx-border-width: 2px; -fx-font-family: 'Comic Sans MS'; -fx-font-weight: bold; -fx-text-fill: #E0218A; -fx-font-size: 14;");
+        baseLayout.setStyle("-fx-background-color: #98d398; -fx-border-color: white; -fx-border-width: 2px; -fx-font-family: 'Comic Sans MS'; -fx-font-weight: bold; -fx-text-fill: #a3d3a3; -fx-font-size: 14;");
 
         //VBOX for LEFT
         leftSide = new VBox();
@@ -55,7 +56,7 @@ public class AudioComponentWidget extends Pane {
         leftSide.getChildren().add(volumeLabel);
         volumeSlider = new Slider(0, 10, 5);
 
-        volumeSlider.setStyle("-fx-color: #F18DBC");
+        volumeSlider.setStyle("-fx-color: #73cb73");
         volumeSlider.setShowTickLabels(true);
         volumeSlider.setShowTickMarks(true);
         leftSide.getChildren().add(volumeSlider);
@@ -66,10 +67,10 @@ public class AudioComponentWidget extends Pane {
         //VBOX for RIGHT
         rightSide = new VBox();
         Button closeBtn = new Button("x");
-        closeBtn.setStyle("-fx-background-color: #F18DBC; -fx-text-fill: white; -fx-border-color: white; -fx-border-width: 2px; -fx-padding: 8px; -fx-font-size: 12px;");
+        closeBtn.setStyle("-fx-background-color: #98d398; -fx-text-fill: #ffffff; -fx-border-color: #ffffff; -fx-border-width: 2px; -fx-padding: 8px; -fx-font-size: 12px;");
         closeBtn.setOnAction(this::closeWidget);
         output = new Circle(10);
-        output.setStyle("-fx-fill: #E0218A");
+        output.setStyle("-fx-fill: #000000");
         //rightSide.getChildren().add(closeBtn);
 
         //Handle drawing the line - handle 3 events
@@ -116,21 +117,21 @@ public class AudioComponentWidget extends Pane {
     }
 
     private void endConnection(MouseEvent e, Circle output) {
-        Circle speaker = SynthesizeApplication.speaker; //get the speaker from the main application
+        Circle speaker = SynthesizerApplication.speaker; //get the speaker from the main application
         Bounds speakerBounds = speaker.localToScene(speaker.getBoundsInLocal());
         double distance = Math.sqrt(Math.pow(speakerBounds.getCenterX() - e.getSceneX(), 2.0) + Math.pow(speakerBounds.getCenterY() - e.getSceneY(), 2.0));
 
 
-        AudioComponentWidget widget = SynthesizeApplication.findClosestConnectable(e);
+        AudioComponentWidget widget = SynthesizerApplication.findClosestConnectable(e);
 
         if (widget != null){
-//            SynthesizeApplication.connectedWidgets_.add(this);
+        //   SynthesizerApplication.connectedWidgets_.add(this);
             widget.ac_.connectInput(this.ac_);
 
         }
         else if (distance<15){
-//            SynthesizeApplication.connectedWidgets_.add(this);
-            SynthesizeApplication.connectToSpeaker(this.ac_);
+          //  SynthesizerApplication.connectedWidgets_.add(this);
+            SynthesizerApplication.connectedWidgets.add(this);
         }
         else{
             parent_.getChildren().remove(line_);
@@ -139,9 +140,10 @@ public class AudioComponentWidget extends Pane {
     }
     private void closeWidget(ActionEvent e) {
         parent_.getChildren().remove(this);
-        SynthesizeApplication.widgets.remove(this);
-        SynthesizeApplication.connectedWidgets.remove(this);
+        SynthesizerApplication.widgets.remove(this);
+        SynthesizerApplication.connectedWidgets.remove(this);
         parent_.getChildren().remove(line_);
+        //Mixer.removeInput(this);
     }
 
     public void moveWidget(MouseEvent e) {
