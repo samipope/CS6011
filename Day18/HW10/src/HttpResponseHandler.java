@@ -29,8 +29,8 @@ public class HttpResponseHandler {
 
 //        OutputStream outStream = output_;
 
-            // FileInputStream fileStream = null;
-            FileInputStream fileStream = new FileInputStream(file);
+            FileInputStream fileStream = null;
+            fileStream = new FileInputStream(file);
 
             if (fileType != null)
                 fileStream = new FileInputStream(file);

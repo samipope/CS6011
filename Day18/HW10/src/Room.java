@@ -25,7 +25,7 @@ public class Room {
 //send message to all the clients in the room
     public void sendMessage(String message){
      for(int i = 0; i<this.clients_.size(); i++){
-         clients_.get(i).getOutputStream();
+       //  clients_.get(i).getOutputStream();
      }
 
 

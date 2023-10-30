@@ -48,9 +48,9 @@ public class Mixer implements AudioComponent {
             AudioClip clip = input.getClip();
             mixerArrayList.add(clip);
         }
-        public static void removeInput(AudioComponent input){
-            mixerArrayList.remove(input);
-        }
+//        public static void removeInput(AudioComponent input){
+//            mixerArrayList.remove(input);
+//        }
 
     }
 
