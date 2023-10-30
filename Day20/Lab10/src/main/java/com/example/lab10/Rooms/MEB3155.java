@@ -9,11 +9,11 @@ public class MEB3155 extends Room{
 
     public MEB3155() {
         super("MEB3155", "A place where MSD students rot" );
-        Item debugger = new Item ("debugger", "your only hope");
-        items_.add(debugger);
         //adding in the sword item which is usable in phillips room
         Item sword = new Item( "Sword", "A golden sword.");
         items_.add( sword );
+        Item plaque = new Item("plaque", "tells you about room");
+        items_.add(plaque);
     }
 
     @Override
@@ -43,6 +43,23 @@ public class MEB3155 extends Room{
         }
         String cmd  = subcommands[0];
         String attr = subcommands[1];
+
+
+        if( cmd.equals( "read" ) && attr.equals( "plaque") ){
+            boolean hasPlaque = false;
+            for( Item item : Adventure.inventory ) {
+                if( item.getName().equals( "plaque" )) {
+                    hasPlaque = true;
+                    break;
+                }
+            }
+            if( hasPlaque ) {
+                System.out.println( "This is the classroom of the MSD students. You will find them here until the wee hours of the night sobbing over their broken code.");
+            }
+
+        }
+
+
 
         // unlock, use
         if( cmd.equals( "unlock" ) && attr.equals( "door") ) {
