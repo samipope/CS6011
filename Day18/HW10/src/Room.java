@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -16,16 +17,16 @@ public class Room {
      rooms_.add(this);
   }
 
-  //TODO this is the only one that has the socket!!!!
+  //this is only one that has the socket!!
   public void addClientToRoom(Socket client){
      this.clients_.add(client);
 
   }
 
 //send message to all the clients in the room
-    public void sendMessage(String message){
+    public void sendMessage(String message) throws IOException {
      for(int i = 0; i<this.clients_.size(); i++){
-       //  clients_.get(i).getOutputStream();
+         clients_.get(i).getOutputStream();
      }
 
 

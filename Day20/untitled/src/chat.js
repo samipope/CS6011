@@ -1,4 +1,3 @@
-"use strict";
 
 const username = document.getElementById("Username");
 const chatroom = document.getElementById("chatroom");
@@ -27,9 +26,6 @@ ws.onopen = function () {
 };
 
 
-//TODO make the check for only capital letters work again!!!
-
-
 function handleKeyPress(event) {
     if (event.key === "Enter") {
         // get value of chatroom
@@ -47,19 +43,20 @@ function handleKeyPress(event) {
 
 
 const chatroomValue = chatroom.value;
-const messageValue = message1.value;
+//const messageValue = message1.value;
+//console.log(message1.value);
 const usernameValue = username.value;
 
 function sendMessage() {
 
 
-
-    if (!/^[a-z]+$/.test(chatroomValue)) {
-        alert("Chatroom should be all lowercase!");
-        chatroom.value = "Enter a valid chatroom ID";
-        chatroom.select();
-        return;
-    }
+    //
+    // if (!/^[a-z]+$/.test(chatroomValue)) {
+    //     alert("Chatroom should be all lowercase!");
+    //     chatroom.value = "Enter a valid chatroom ID";
+    //     chatroom.select();
+    //     return;
+    // }
 
     if (wsOpen) {
         if(!userJoined) {
@@ -68,7 +65,7 @@ function sendMessage() {
             userJoined=true;
         }
         //lets a message get sent
-        ws.send('message ' + messageValue);
+        ws.send('message ' + message1.value);
     }
     if(!wsOpen){
         //allows a person to leave the chatroom
@@ -80,6 +77,12 @@ function sendMessage() {
 function joinRoom() {
     if (wsOpen) {
         if(!userJoined) {
+            const chatroomValue = chatroom.value;
+            // check that chatroom is within range, if not give error
+            if ('a' >= chatroomValue && chatroomValue <= 'z') {
+                alert("Chatroom should be all lowercase!");
+                chatroom.value = "Enter a valid chatroom ID";
+                chatroom.select();}
             // lets a person join the chat room
             ws.send('join ' + username.value + ' ' + chatroom.value);
             userJoined=true;
