@@ -1,0 +1,33 @@
+LAB2 6012
+SAMANTHA POPE
+
+1. On your computer, how many times per second does the millisecond timer update?
+The millisecond timer updated 1000.4 times per second when I made it 10 seconds long to run. The loop tested the time 359933584 times when I ran it for 10 seconds. 
+
+
+2. Is it possible to determine how many times per second the nanosecond timer updates? If so, how many? If not, why not?
+
+
+
+3. Judging by experiment 4, how long does it appear to take to compute System.nanoTime()?
+
+
+
+4. Estimate the precision of your answer above (+/- how many nanoseconds?)
+
+
+
+5. How long does it take to compute the square root of the numbers 1 through 10?
+
+
+
+6. Estimate the precision of your answer above (+/- how many nanoseconds?)
+
+
+
+7. If you repeat the square root test 100x as many times, does the precision improve?
+
+
+
+8. How could you improve the results (get a more accurate estimate of elapsed time)?
+

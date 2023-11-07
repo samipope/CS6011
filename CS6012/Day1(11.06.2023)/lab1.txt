@@ -1,0 +1,34 @@
+1. Where is the assertEquals method defined? What does it do? Can we use assertEquals for more than just int types? (Hint: Consult the API for JUnit)
+The assertEquals method is defined in import static org.junit.jupiter.api.Assertions.*;. We can use assert equals for more than ints. We can also use it for strings and other types using the .Equals method in java. We may have to change the syntax a little, but we can still use it. 
+
+
+
+2. Briefly describe what each of the three tests is checking.
+The first test is checking that an empty array will return -1. It passes the test. The second test is checking that in an array full of the same number, it will find that the difference between them all is 0. The third test is testing a full array with negative and positive numbers to see if we can find the smallest difference. 
+
+
+
+3. Why is our unimplemented findSmallestDiff method passing one of the tests?
+It passed the second one, where the array was all 0 and that is what the answer was. It was just good luck that it passed this test. 
+
+
+
+4. Why are we failing the third test? How should our method be modified to correct this?
+We were failing this test because we weren't looking at the absolute value of the difference between the numbers. We were just looking at the smallest number. I added in Math.abs() into the function and now it passed!
+
+
+
+5. What is the appropriate call to assertEquals for your new test (test 4)?
+It was appropriate to call assertEquals because I knew the value that the test should return and also knew that it was appropriate to compare the two integers. 
+
+
+
+6. Provide one more test (test 5) for the findSmallestDiff method. Briefly describe your test and write the call to assertEquals here.
+I tested that the findSmallestDiff could work in an array with two elements. I called assert equals like this:
+        assertEquals(0,DiffUtil.findSmallestDiff(arr4));
+
+
+7. Briefly describe your unit tests for Assignment 1.
+I did unit tests in assignment one that tested individual functions (or units) in the code. My tests mainly followed the method discussed in class where you run smaller tests first with cases you know the answer to and then start to add in the edge cases. I did have to change some of my functions as I tested certain cases. 
+
+
