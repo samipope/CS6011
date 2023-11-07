@@ -6,28 +6,35 @@ The millisecond timer updated 1000.4 times per second when I made it 10 seconds 
 
 
 2. Is it possible to determine how many times per second the nanosecond timer updates? If so, how many? If not, why not?
-
+First run of TimingExperiment05: 2.36810086E7 times per second.
+Second: Time advanced 2.3792176E7 times per second.
+Three: Time advanced 2.3792176E7 times per second.
+Four: Time advanced 2.38086565E7 times per second.
+Five:Time advanced 2.3792176E7 times per second.
+I think we can estimate it, but the numbers were slightly different so it may take a lot of runs to eliminate all of the noise and find out how many times per second the nanosecond timer is updating. 
 
 
 3. Judging by experiment 4, how long does it appear to take to compute System.nanoTime()?
-
+Most of them took around 83 seconds. however, I had a large range of nanoseconds going from 41 to 500. The 500 one is probably noise, because it is a significant outlier in the dataset. 
 
 
 4. Estimate the precision of your answer above (+/- how many nanoseconds?)
-
+This is not very precise. I had answers of 500, 417, 125, 83,42,41, and 85. This means that this experiment is not good at replicating its results. It is not a very precise measurement. 
 
 
 5. How long does it take to compute the square root of the numbers 1 through 10?
-
+For my method, it took 228.0 nanoseconds to calculate the sqrt of numbers 1 through 10. 
 
 
 6. Estimate the precision of your answer above (+/- how many nanoseconds?)
-
+I ran it three times. I got 190, 238 and 228 nanoseconds to run. This is not very precise. 
 
 
 7. If you repeat the square root test 100x as many times, does the precision improve?
+I multiplied my "times" by 100 and got 9 nanoseconds, 10 nanoseconds and then 11 nanoseconds. The precision was greatly improved!!
 
 
 
 8. How could you improve the results (get a more accurate estimate of elapsed time)?
+I think that I could use a midpoint timer (like in the timing8experiment). Also, the more that I run this experiment the more accurate I would expect the average time to be. It might also be a good idea to run it on different devices to be sure that we eliminate noise of one particular machine. 
 
