@@ -7,6 +7,21 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
+//TODO try not to fucking die
+//         mirrored works on skinny image (0/5)
+//        normalized works on non-square images (0/5)
+//        crop throws as expected (0/5)
+//        mirroed works on nonsqaure images (0/5)
+//        crop correct for nonsquare images (0/5)
+//        equals works for wide/tall images (0/5)
+
+
+
+
+
+
+
+
 /**
      * Represents a grayscale (black and white) image as a 2D array of "pixel" brightnesses
      * 255 is "white" 127 is "gray" 0 is "black" with intermediate values in between
@@ -119,14 +134,22 @@ import java.net.URL;
             return false; //different length, not equal
         }
 
-        for (var row = 0; row < imageData.length; row++) {
-            for (var col = 0; col < otherImage.imageData[0].length; col++) {
-                if (imageData[col][row] != otherImage.imageData[col][row]) {
+
+
+        for (int row = 0; row < imageData.length; row++) {
+            if (imageData[row] != otherImage.imageData[row]) {
+                return false; //if one pixel is different, they are not the same
+            }
+        }
+
+        for (int col = 0; col < otherImage.imageData[0].length; col++) {
+                if (imageData[col] != otherImage.imageData[col]) {
                     return false; //if one pixel is different, they are not the same
                 }
             }
-        } return true; //otherwise return true - all pixels are equal
-    }
+        return true;
+        }  //otherwise return true - all pixels are equal
+
 
 
     /**
@@ -183,6 +206,8 @@ import java.net.URL;
         // create a new GrayscaleImage with the same dimensions
         GrayscaleImage mirroredImage = new GrayscaleImage(new double[width][height]);
 
+
+
         for (int j = 0; j < width; ++j) {
             for (int i = 0; i < height; i++) {
                 mirroredImage.imageData[j][i] = this.imageData[j][height - i - 1];
@@ -192,7 +217,6 @@ import java.net.URL;
 
         return mirroredImage;
     }
-
 
     /**
      * Returns a new GrayscaleImage of size width x height, containing the part of `this`

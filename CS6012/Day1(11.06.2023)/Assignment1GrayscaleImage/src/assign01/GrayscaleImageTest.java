@@ -12,6 +12,7 @@ class GrayscaleImageTest {
     private GrayscaleImage largeWide;
     private GrayscaleImage largeWidePlusOne;
     private GrayscaleImage emptySquare;
+    private GrayscaleImage skinnyTest;
 
 
     @BeforeEach
@@ -20,6 +21,7 @@ class GrayscaleImageTest {
         smallWide = new GrayscaleImage(new double[][]{{1,2,3},{4,5,6}});
         largeWide = new GrayscaleImage(new double[][]{{1,2,3,4,5,6,7,8,9},{1,2,3,4,5,6,7,8,9}});
         largeWidePlusOne = new GrayscaleImage(new double[][]{{0,2,3,4,5,6,7,8,9},{1,2,3,4,5,6,7,8,9}});
+        skinnyTest = new GrayscaleImage(new double[][]{{1,2},{3,4},{5,6}});
     }
 
 
@@ -81,6 +83,12 @@ class GrayscaleImageTest {
     void mirrored() {
         var expected = new GrayscaleImage(new double[][]{{2,1},{4,3}});
         assertEquals(smallSquare.mirrored(), expected);
+    }
+
+    @Test
+    void mirroredOnSkinnyImage(){
+        var skinnyMirrored = new GrayscaleImage(new double[][]{{2,1},{4,3},{6,5}});
+        assertEquals(skinnyTest.mirrored(),skinnyMirrored);
     }
 
     @Test
