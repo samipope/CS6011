@@ -53,14 +53,12 @@ public class Book {
        if(this == other){
            return true;
        }
-//       if(other.getClass() != this.getClass()){
-//           return false; //if the classes are different
-//       }
-        Book other1 = (Book) other;
-        if(this.author.equals(other1.getAuthor()) && this.isbn == other1.isbn && this.title.equals(other1.title)){
-            return true;
+        if (!(other instanceof Book)) {
+            return false; //different object types - not equal
         }
-       return false;
+
+        Book other1 = (Book) other;
+        return this.author.equals(other1.getAuthor()) && this.isbn == other1.isbn && this.title.equals(other1.title);
     }
 
     /**

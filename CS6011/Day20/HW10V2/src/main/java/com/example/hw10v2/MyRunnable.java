@@ -1,7 +1,9 @@
 package com.example.hw10v2;
+
 import java.io.*;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
+
 
 public class MyRunnable implements Runnable {
 

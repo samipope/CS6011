@@ -1,25 +1,12 @@
 package assign01;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
-//TODO try not to fucking die
-//         mirrored works on skinny image (0/5)
-//        normalized works on non-square images (0/5)
-//        crop throws as expected (0/5)
-//        mirroed works on nonsqaure images (0/5)
-//        crop correct for nonsquare images (0/5)
-//        equals works for wide/tall images (0/5)
-
-
-
-
-
-
 
 
 /**
@@ -135,18 +122,25 @@ import java.net.URL;
         }
 
 
-
-        for (int row = 0; row < imageData.length; row++) {
-            if (imageData[row] != otherImage.imageData[row]) {
-                return false; //if one pixel is different, they are not the same
+        if(this.imageData.length<this.imageData[0].length) {
+                for (int col = 0; col < otherImage.imageData[0].length; col++) {
+                    for (int row = 0; row < imageData.length; row++) {
+                        if (this.getPixel(row, col) != otherImage.getPixel(row, col)) {
+                            return false; //if one pixel is different, they are not the same
+                        }
+                    }
+                }
+        }
+        else {
+            for (int col = 0; col < otherImage.imageData[0].length; col++) {
+                for (int row = 0; row < imageData.length; row++) {
+                    if (this.getPixel(col, row) != otherImage.getPixel(col, row)) {
+                        return false; //if one pixel is different, they are not the same
+                    }
+                }
             }
         }
 
-        for (int col = 0; col < otherImage.imageData[0].length; col++) {
-                if (imageData[col] != otherImage.imageData[col]) {
-                    return false; //if one pixel is different, they are not the same
-                }
-            }
         return true;
         }  //otherwise return true - all pixels are equal
 
@@ -180,14 +174,28 @@ import java.net.URL;
     public GrayscaleImage normalized() {
         double scale = 127 / this.averageBrightness();
         //make new image
-        var expectedNorm = new GrayscaleImage(new double[imageData.length][imageData.length]);
-        for (var row = 0; row < imageData.length; row++) {
-            for (var col = 0; col < imageData[0].length; col++) {
-                double newData = (imageData[row][col]) * scale;
-                //load it with data
-                expectedNorm.imageData[row][col] = newData;
+        var expectedNorm = new GrayscaleImage(new double[imageData.length][imageData[0].length]);
+
+        if(imageData.length>= imageData[0].length){
+            for (var row = 0; row < imageData.length; row++) {
+                 for (var col = 0; col < imageData[0].length; col++) {
+                        double newData = (imageData[row][col]) * scale;
+                        //load it with data
+                        expectedNorm.imageData[row][col] = newData;
+                 }
             }
         }
+        else {
+            for (var col = 0; col < imageData[0].length; col++){
+                for (var row = 0; row < imageData.length; row++) {
+                    double newData = (imageData[row][col]) * scale;
+                    //load it with data
+                    expectedNorm.imageData[row][col] = newData;
+                }
+            }
+
+        }
+
         //return new image
         return expectedNorm;
     }
@@ -206,14 +214,23 @@ import java.net.URL;
         // create a new GrayscaleImage with the same dimensions
         GrayscaleImage mirroredImage = new GrayscaleImage(new double[width][height]);
 
-
-
-        for (int j = 0; j < width; ++j) {
-            for (int i = 0; i < height; i++) {
-                mirroredImage.imageData[j][i] = this.imageData[j][height - i - 1];
+        if(width>height) {
+            for (int j = 0; j < width; j++) {
+                for (int i = 0; i < height; i++) {
+                    mirroredImage.imageData[j][i] = this.imageData[j][height - i - 1];
+                }
             }
         }
-        //could use swap functionality instead?
+        else{
+                for (int i = 0; i < height; i++) {
+                    for (int j = 0; j < width; j++) {
+                    mirroredImage.imageData[j][i] = this.imageData[j][height - i - 1];
+                }
+            }
+        }
+
+
+
 
         return mirroredImage;
     }
@@ -235,19 +252,37 @@ import java.net.URL;
         int originalHeight = this.imageData[0].length;
 
         // check if the specified rectangle is within the bounds of the original image
-        if (startRow < 0 || startCol < 0 || startRow + height > originalHeight || startCol + width > originalWidth) {
+        if (startRow < 0 || startCol < 0 ) {
             throw new IllegalArgumentException("specified rectangle is outside the bounds of the original image");
+        }
+
+        if(width>originalWidth || height>originalHeight){
+            throw new IllegalArgumentException("cannot crop to a larger amount");
         }
 
         // create a new GrayscaleImage for the cropped sub-image
         double[][] croppedData = new double[width][height];
 
-        // copy the pixel values from the original image to the cropped image
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
-                croppedData[x][y] = this.imageData[startCol + x][startRow + y];
+
+        if(height>=width) {
+            // copy the pixel values from the original image to the cropped image
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    croppedData[x][y] = this.imageData[startCol + x][startRow + y];
+                }
             }
         }
+        else {
+            for (int x = 0; x < width; x++) {
+             for (int y = 0; y < height; y++) {
+                    croppedData[x][y] = this.imageData[startCol + x][startRow + y];
+                }
+            }
+
+        }
+
+
+
 
         return new GrayscaleImage(croppedData);
 

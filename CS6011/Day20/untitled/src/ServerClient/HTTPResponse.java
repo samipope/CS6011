@@ -4,6 +4,8 @@ import java.io.*;
 import java.net.Socket;
 import java.security.MessageDigest;
 import java.util.Base64;
+import java.util.ArrayList;
+import java.nio.charset.StandardCharsets;
 
 public class HTTPResponse {
 
@@ -37,6 +39,10 @@ public class HTTPResponse {
         outStream.flush();
         outStream.close();
     }
+
+
+
+
     public void sendWebSockHandshake(Socket client, String key) throws IOException {
         OutputStream outStream = client.getOutputStream();
 
@@ -74,5 +80,7 @@ public class HTTPResponse {
         outStream.close();
 
     }
+
+
 
 }

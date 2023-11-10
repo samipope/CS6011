@@ -46,6 +46,10 @@ class GrayscaleImageTest {
         var equivalent = new GrayscaleImage(new double[][]{{1,2},{3,4}});
         assertEquals(smallSquare, equivalent);
         assertEquals(largeWide,largeWide);
+        var skinnyTestEquiv = new GrayscaleImage(new double[][]{{1,2},{3,4},{5,6}});
+        assertEquals(skinnyTest, skinnyTestEquiv);
+
+
     }
 
     @Test
@@ -77,12 +81,14 @@ class GrayscaleImageTest {
                         "pixel at row: " + row + " col: " + col + " incorrect");
             }
         }
+
     }
 
     @Test
     void mirrored() {
         var expected = new GrayscaleImage(new double[][]{{2,1},{4,3}});
         assertEquals(smallSquare.mirrored(), expected);
+
     }
 
     @Test
@@ -91,10 +97,21 @@ class GrayscaleImageTest {
         assertEquals(skinnyTest.mirrored(),skinnyMirrored);
     }
 
+//    @Test
+//    void mirroredOnFatImage(){
+//        var  smallWideMirrored = new GrayscaleImage(new double[][]{{3,2,1},{6,5,4}});
+//        System.out.println(smallWide.mirrored());
+//        System.out.println(smallWideMirrored.equals(smallWide.mirrored()));
+//      //  assertEquals(smallWide.mirrored(),smallWideMirrored);
+//    }
+
     @Test
     void cropped() {
         var cropped = smallSquare.cropped(1,1,1,1);
         assertEquals(cropped, new GrayscaleImage(new double[][]{{4}}));
+        var croppedWide = smallWide.cropped(1,1,1,1);
+        assertEquals(croppedWide, new GrayscaleImage(new double[][]{{5}}));
+
     }
 
     @Test

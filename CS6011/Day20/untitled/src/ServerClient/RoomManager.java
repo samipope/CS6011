@@ -1,5 +1,6 @@
 package ServerClient;
 
+import java.io.IOException;
 import java.util.ArrayList;
 public class RoomManager {
     ArrayList<ChatRoom> chatRmArr = new ArrayList<>();
@@ -15,7 +16,7 @@ public class RoomManager {
         return null;
     }
 
-    public void joinRoom(MyRunnable runnable) {
+    public void joinRoom(MyRunnable runnable) throws IOException {
 
         ChatRoom room = findRoom(runnable.getRoomName_());
 
@@ -27,7 +28,7 @@ public class RoomManager {
             newChatRoom.addClient(runnable);
         }
     }
-    public void leaveRoom(MyRunnable runnable) {
+    public void leaveRoom(MyRunnable runnable) throws IOException {
         ChatRoom room = findRoom(runnable.getRoomName_());
 
         if (room != null) {
@@ -37,7 +38,7 @@ public class RoomManager {
 
     }
 
-    public void sendMess(String msg, MyRunnable runnable) {
+    public void sendMess(String msg, MyRunnable runnable) throws IOException {
         ChatRoom room = findRoom(runnable.getRoomName_());
         if (room != null) {
             room.sendMessage(runnable, msg);

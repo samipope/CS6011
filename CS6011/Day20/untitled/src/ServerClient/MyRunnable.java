@@ -16,10 +16,10 @@ public class MyRunnable implements Runnable {
 
     public MyRunnable(Socket client, RoomManager rm) {
         client_ = client;
-        username_=null;
-        roomName_=null;
-        message_=null;
-        rm_=rm;
+        username_ = null;
+        roomName_ = null;
+        message_ = null;
+        rm_ = rm;
     }
 
     private String decodeMessage() throws IOException {
@@ -73,8 +73,7 @@ public class MyRunnable implements Runnable {
 
     private static ArrayList<Byte> getBytesFromNumber(int number, int length) {
         ArrayList<Byte> results = new ArrayList<>();
-        for(int i=0; i<length; i++)
-        {
+        for (int i = 0; i < length; i++) {
             byte current = (byte) (number & 0xff);
             number = number >> 8;
             results.add(current);
@@ -85,38 +84,37 @@ public class MyRunnable implements Runnable {
 
 
     public static byte[] getResponseFrame(String message) {
-            //DataOutputStream dataOut = new DataOutputStream(client_.getOutputStream());
-            byte[] payload = message.getBytes(StandardCharsets.UTF_8);
-            int payloadLength = payload.length;
-            ArrayList<Byte> responseFrame = new ArrayList<>();
-            // FIN / RSV*3 / OPCODE
-            byte firstByte = (byte) 0x81;
-            responseFrame.add(firstByte);
-            if (payloadLength <= 125) {
-                byte secondByte = (byte) payloadLength;
-                responseFrame.add(secondByte);
-            } else if (payloadLength <= 0xffff) {
-                byte secondByte = 126;
-                responseFrame.add(secondByte);
-                ArrayList<Byte> lengthBytes = getBytesFromNumber(payloadLength, 2);
-                responseFrame.addAll(lengthBytes);
-            } else {
-                byte secondByte = 127;
-                responseFrame.add(secondByte);
-                ArrayList<Byte> lengthBytes = getBytesFromNumber(payloadLength, 8);
-                responseFrame.addAll(lengthBytes);
-            }
-            for (byte p :
-                    payload) {
-                responseFrame.add(p);
-            }
-            byte[] results = new byte[responseFrame.size()];
-            for (int i = 0; i < responseFrame.size(); i++) {
-                results[i] = responseFrame.get(i);
-            }
-            return results;
+        //DataOutputStream dataOut = new DataOutputStream(client_.getOutputStream());
+        byte[] payload = message.getBytes(StandardCharsets.UTF_8);
+        int payloadLength = payload.length;
+        ArrayList<Byte> responseFrame = new ArrayList<>();
+        // FIN / RSV*3 / OPCODE
+        byte firstByte = (byte) 0x81;
+        responseFrame.add(firstByte);
+        if (payloadLength <= 125) {
+            byte secondByte = (byte) payloadLength;
+            responseFrame.add(secondByte);
+        } else if (payloadLength <= 0xffff) {
+            byte secondByte = 126;
+            responseFrame.add(secondByte);
+            ArrayList<Byte> lengthBytes = getBytesFromNumber(payloadLength, 2);
+            responseFrame.addAll(lengthBytes);
+        } else {
+            byte secondByte = 127;
+            responseFrame.add(secondByte);
+            ArrayList<Byte> lengthBytes = getBytesFromNumber(payloadLength, 8);
+            responseFrame.addAll(lengthBytes);
+        }
+        for (byte p :
+                payload) {
+            responseFrame.add(p);
+        }
+        byte[] results = new byte[responseFrame.size()];
+        for (int i = 0; i < responseFrame.size(); i++) {
+            results[i] = responseFrame.get(i);
+        }
+        return results;
     }
-
 
 
     public void encodeMessage(String response) throws IOException {
@@ -124,35 +122,56 @@ public class MyRunnable implements Runnable {
         OutputStream out = null;
         try {
             out = client_.getOutputStream();
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
         assert out != null;
         out.write(getResponseFrame(response));
+
+
     }
 
 
-
-
-
-
+//    public void encodeMessage(String response) throws IOException {
+//        System.out.println("send response: " + response);
+//        OutputStream out = null;
+//        try {
+//            out = client_.getOutputStream();
+//            PrintWriter printWriter = new PrintWriter(out, true);
+//            sendResponseHeader(printWriter);
+//            Thread.sleep(1000);
+//            sendResponseBody(out);
+//            printWriter.close();
 //
-//            // Construct a WebSocket text frame
-//            byte[] frame = new byte[messageBytes.length + 2];
-//            frame[0] = (byte) 0x81;  // Text frame opcode
-//            frame[1] = (byte) messageBytes.length;  // Length of the message
-//
-//            System.arraycopy(messageBytes, 0, frame, 2, messageBytes.length);
-//
-//            dataOut.write(frame);
-//            dataOut.flush();
 //        } catch (IOException e) {
+//            System.out.println(e.getMessage());
 //            e.printStackTrace();
 //        }
+//        assert out != null;
+//        out.write(getResponseFrame(response));
+//
+//
+//        // Construct a WebSocket text frame
+//        byte[] frame = new byte[messageBytes.length + 2];
+//        frame[0] = (byte) 0x81;  // Text frame opcode
+//        frame[1] = (byte) messageBytes.length;  // Length of the message
+//
+//        System.arraycopy(messageBytes, 0, frame, 2, messageBytes.length);
+//
+//        dataOut.write(frame);
+//        dataOut.flush();
+//    } catch(
+//    IOException e)
+//
+//    {
+//        e.printStackTrace();
+//    }
+//
+//}
 
-
-    private void parseMessType(String message) {
+    private void parseMessType(String message) throws IOException {
         String cmd_;
         String[] messArr = message.split(":");
         cmd_ = messArr[0];
@@ -226,7 +245,7 @@ public class MyRunnable implements Runnable {
                         //This leave room does the wrong name?
                         rm_.leaveRoom(this);
 
-                        client_.close();
+                       client_.close();
                     }
                     else{
                         parseMessType(msg);
@@ -241,7 +260,7 @@ public class MyRunnable implements Runnable {
 
                 //sends the response back to the client
                 response.sendHTTPResponse(client_, file, request.getFileType());
-                client_.close();
+               // client_.close();
 
             }
         } catch (Exception e) {

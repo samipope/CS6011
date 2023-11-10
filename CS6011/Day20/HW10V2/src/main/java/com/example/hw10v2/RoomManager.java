@@ -2,7 +2,7 @@ package com.example.hw10v2;
 
 import java.util.ArrayList;
 public class RoomManager {
-    ArrayList<ServerClient.ChatRoom> chatRmArr = new ArrayList<>();
+    ArrayList<ChatRoom> chatRmArr = new ArrayList<ChatRoom>();
     public RoomManager() {
     }
     private ChatRoom findRoom(String roomName) {
