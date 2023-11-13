@@ -1,0 +1,22 @@
+SAMANTHA POPE AND ELISABETH FRISCHKNECHT
+LAB05
+1. What activities did you do as the driver? What activities did you do as the navigator?
+When I was the driver, I was able to code and implement my own solutions to what we were discussing. As the navigator, I googled syntax problems and brainstormed on solutions. I also recommended changes to the code as the driver typed.
+
+2. What are the advantages and disadvantages of serving in each role?
+Advantages of the driver are that you can have control over where things go in the code and make it follow your style/preferences. Disadvantages of the driver is that it is hard to implement code from another person's ideas or pseudocode. The advantages of navigator is you can think more abstractly and big picture. I also like learning about things and googling them. The disadvantage of the navigator is that you lose some control in how the code is written. 
+
+3. How often did you and your partner switch roles? Did you switch often enough?
+We switched multiple times per function as we both knew how to type different parts. I think we switched a great amount. 
+
+
+4. Which is your preferred role and why?
+My preferred role is the navigator because I like to think about the big picture and not have to worry about the syntax and small details. 
+
+5. Explain why this is a BAD test case for your method: assertEquals("bird", MedianSolver.median(new String[]{"bird", "cat", "dog", "ant"}))
+This could be a bad test case because we are passing four elements and don't decide which ones are above and below the median. We also d onot know how the strings are compared with the naturalOrder, so we should use the comparator. If it sorted by size, then bird would be last and not be the median. 
+
+
+6. Explain how you could change the test to make it "valid" and explain how you could change the specification so that this is considered a "good" test
+You could change the test and make it "good" by commenting really well how the natural oder works and why you expect that outcome. Or you can pass a comparator that we can see how it compares two strings together. 
+
