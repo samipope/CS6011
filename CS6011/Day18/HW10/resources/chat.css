@@ -1,0 +1,23 @@
+
+button {
+    width: fit-content;
+}
+
+
+#Messages{
+    background-color: #90a9d9;
+    width: 400px;
+}
+
+#People{
+    background-color: #90a9d9;
+    width: 200px;
+}
+
+table {
+    padding: 10px;
+    border-spacing: 10px;
+    border: 1px;
+    border-color: black;
+    background-color: cornflowerblue;
+}

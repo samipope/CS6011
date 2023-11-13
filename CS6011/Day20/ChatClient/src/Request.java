@@ -24,7 +24,7 @@ public class Request {
     }
 
     public String getFilePath(String fn) {
-        return "server/resources/" + fn;
+        return "/Users/samanthapope/6011Github/Github/CS6011/Day20/ChatClient/resources" + fn;
     }
 
     private void checkIfFileExists() {

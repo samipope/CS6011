@@ -1,48 +1,39 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en">
 
 <head>
-  <title>Chat Client Server</title>
-  <link rel="stylesheet" href="chat.css">
-  <script defer type="text/javascript" src="chat.js"></script>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Welcome To Web Chat</title>
 </head>
 
 <body>
-<h1>Chat Client Server</h1>
-<label>Username:</label>
-<input type="text" id="Username" >
-<label>ChatRoom:</label>
-<input type="text" id="chatroom" >
-<button id = "joinRoomButton"><lab>Join Room</lab></button>
-<button id = "leaveRoomButton"><lab>Leave Room</lab></button>
-<table border="1">
-  <tr>
-    <td><div id="People">
-      <label><b>People in Chatroom:</b><br></label>  </div></td>
-
-
-    <td><div id="Messages">
-      <label><b>Messages:</b></label>   </div></td>
-
-  </tr>
-
-  <tr>
-
-  </tr>
-  <tr>
-    <td></td>
-  </tr>
-
-  <tr>
-
-  </tr>
-
-</table>
-<label>Message:</label>
-<input type="text" id="message">
-<button id="sendButton"><lab>Send</lab></button>
-
-
+<h1>Web Chat</h1>
+<div id="basic-info-inputs">
+    <div>
+        <label for="user-name">User Name:</label>
+        <input type="text" id="user-name" placeholder="non empty string"/>
+    </div>
+    <div>
+        <label for="room-name">Room Name:</label>
+        <input type="text" id="room-name" placeholder="lower cased, no spaces"/>
+    </div>
+</div>
+<div id="message-board">
+    <div id="people-list">
+        <h2>People List</h2>
+        <ul id="people-list-content"></ul>
+        <h3 id="people-counter"></h3>
+    </div>
+    <div id="message-list">
+        <h2>Message History</h2>
+        <div id="message-queue"></div>
+    </div>
+</div>
+<div id="message-input-container">
+    <textarea id="message-input" placeholder="please enter your message" ></textarea>
+</div>
+<script src="chat.js"></script>
 </body>
 
 </html>
