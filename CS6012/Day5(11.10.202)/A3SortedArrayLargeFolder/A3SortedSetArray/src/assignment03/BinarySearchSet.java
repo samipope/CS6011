@@ -3,45 +3,25 @@ package assignment03;
 import java.util.*;
 import java.lang.reflect.Array;
 
-//TODO below:
-    //create tests
-    //fix functions
-    //PDF document on how to
-
-//FIXME
-//first and last tests (0/12)
-//contains tests (0/6)
-//toArray tests (0/3)
-//basic tests on empty set with Comparable (0/6)
-//test add (0/3)
-//comparator tests (0/6)
-//test addAll, ContainsAll (0/6)
-
-
 
 public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
-
     private int capacity;
     private E[] elements;
     private int size;
-    private final Comparator<? super E> comparator;
-    private int size_;
-
+    private Comparator<? super E> comparator;
 
     // Constructors
     public BinarySearchSet() {
         this.capacity=10;
         this.elements = (E[]) new Object[capacity];
-        this.comparator = null;
         this.size=0;
     }
 
-    public BinarySearchSet(Comparator<E> comparator) {
+    public BinarySearchSet(Comparator<? super E> comparator) {
         this.capacity=10;
         this.elements = (E[]) new Object[capacity];
         this.comparator = comparator;
         this.size=0;
-
     }
 
 
@@ -55,113 +35,53 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
     //in add method, if it is not there, what do we want to get back? --> where it should go
     //returns index where val should be in the array
     //when we call it in contains we get a positive index no matter what --> have to check that index and if thing we want is there - its there
-//    private int binarySearch(E element) {
-//        return binarySearchImp(elements, element, 0, (size-1));
-//        //the left and right define an interval - closed or half open
-//    }
-//
-//
-//    public int binarySearchImp(E[] arr, E val, int beg, int end) {
-//        if ((end - beg) <= 0) {
-//            return -1;
-//        }
-//
-//        while (beg<=end) {
-//            //how do you know when to use compareTo or comparator ??
-//            //if they called the constructor where they gave us the comparator, if not then we should just use comparator
-//            //if comparator value is null, use compareTo, if not use the comparator they gave us
-//            //can use our own comparator that we make that can use "natural order" that
-//            int middle = (beg + end) / 2;
-//           int cmp = compareWithEither(val, arr[middle]);
-//
-//            if (cmp == 0) {
-//                return middle;
-//            } else if (cmp > 0) {
-//                end = middle-1;
-//                //return binarySearchImp(arr, val, middle + 1, end);
-//            } else {
-//                beg= middle+1;
-//               // return binarySearchImp(arr, val, beg, middle);
-//            }
-//       } return -(end+1);
-//    }
-//
-//    private int compareWithEither(E val, E arrvalue) {
-//        if(val ==null || arrvalue ==null){return 0;}
-//        // If the user used the constructor that did not give us a comparator, use the built-in one
-//        if (comparator == null) {
-//            // Use compareTo that is built-in for elements implementing Comparable
-//            if (val instanceof Comparable) {
-//                return ((Comparable<E>) val).compareTo(arrvalue);
-//            } else {
-//                // Handle the case where val is not Comparable (you might want to throw an exception or handle it in some way)
-//                throw new IllegalArgumentException("Elements must be Comparable if no comparator is provided.");
-//            }
-//        }else { //if comparator is not null, use the one that the user provided
-//            return comparator.compare(val, arrvalue);}
-//    }
-
     private int binarySearch(E element) {
-
-        // Initialize low and high indices for the binary search
-        int left = 0;
-        int right = size_ - 1;
-
-        if ((left - right) <= 0) {
-                     return -1;}
-
-        // Perform binary search until low index is less than or equal to high index
-        while (left <= right) {
-            // Calculate the middle index
-            //int mid = right+left /2;
-            int mid = left+ (right-left) / 2;
-            int cmp;
-            // Compare elements using either the provided comparator or natural ordering
-            if (comparator != null) {
-                // Use the provided comparator for comparison
-                cmp = comparator.compare(elements[mid], element);
-            } else {
-                try {
-                    //Use natural ordering for comparison
-                    Comparable<? super E> midVal = (Comparable<? super E>) elements[mid];
-                    cmp = midVal.compareTo(element);
-                } catch (ClassCastException e) {
-                    //If the natural ordering doesn't work
-                    throw new ClassCastException(e.getMessage());
-                }
-            }
-
-            // Adjust low and high indices based on the comparison result
-            if (cmp < 0) {
-                left = mid + 1;
-            } else if (cmp > 0) {
-                right = mid - 1;
-            } else {
-                return mid; // Element found, returns a positive if present
-            }
-        }
-
-        return -left - 1; // Element not found, return the insertion point, add a +1 to account for first element creation
+        return binarySearchImp(elements, element, 0, (size-1));
+        //the left and right define an interval - closed or half open
     }
 
+
+    public int binarySearchImp(E[] arr, E val, int beg, int end) {
+        int middle = (beg + end ) / 2;
+        while (beg <= end) {
+            int cmp = compareWithEither(val, arr[middle]);
+
+            if (cmp == 0) {
+                return middle;
+            } else if (cmp < 0) {
+                end = middle - 1;
+                //return binarySearchImp(arr, val, middle + 1, end);
+            } else {
+                beg = middle + 1;
+                // return binarySearchImp(arr, val, beg, middle);
+            }
+            middle = (beg + end ) / 2;
+        }
+
+        return  beg;
+    }
+
+    private int compareWithEither(E val, E arrvalue) {
+
+        // If the user used the constructor that did not give us a comparator, use the built-in one
+        if (comparator == null) {
+            // Use compareTo that is built-in for elements implementing Comparable
+//            if (val instanceof Comparable) {
+                return ((Comparable<E>) val).compareTo(arrvalue);
+
+        }else { //if comparator is not null, use the one that the user provided
+            return comparator.compare(val, arrvalue);
+        }
+    }
 
     /**
      * @return The comparator used to order the elements in this set, or null if
      * this set uses the natural ordering of its elements (i.e., uses
      * Comparable).
      */
-    public Comparator comparator(E val, E arrvalue) {
-        if(comparator==null){
-            Comparator comparator1 = null;
-            return comparator1;
-        }
-        return comparator;
-    }
-
-
     @Override
-    public Comparator comparator() {
-        return null;
+    public Comparator<? super E> comparator() {
+        return comparator;
     }
 
     /**
@@ -196,7 +116,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
             throw new NoSuchElementException();
         }
         //if the element at this place is null, throw exception
-        else if (elements[0] == null) {
+        else if (elements[size-1] == null) {
             throw new NoSuchElementException();
         }
         //else return the object at this spot
@@ -218,39 +138,27 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
      */
     @Override
     public boolean add(E element) {
-        //TODO ADD IN CHECK FOR IF THE ARRAY OF ELEMENTS IS NULL (make a new one)
-        if(elements==null){
 
-        }
-
-        //add in boolean variable for added that is returned?
-
-        //don't allow null items to be added
-        if (element == null) {
-            throw new IllegalArgumentException("Can't add null element");
-        }
-        if(contains(element)){
+        if(contains(element)|| element == null){
             return false;}
         // Find the insertion point using binary search
-        int insertionPoint = binarySearch(element);
-        // If the element is already present in the set, it will return positive, return false
-        if (insertionPoint >= 0) {
-            return false;
-        }
-        // If the insertion point is negative, this is a flag for the index, convert it to a positive
-        insertionPoint = -(insertionPoint + 1);
+        int insertionPoint = binarySearch(element) ; // No  + 1
 
         // If the current size exceeds the capacity, increase the capacity of the set
         if (size == (elements.length-1)) {
             resizeArray();
         }
-
-        // Shift elements to make space for the new element at the insertion point
-        System.arraycopy(elements, insertionPoint, elements, insertionPoint + 1, size - insertionPoint);
+        if(size == 0){
+            elements[0] = element;
+        }
+        else {
+            // Shift elements to make space for the new element at the insertion point
+            System.arraycopy(elements, insertionPoint, elements, insertionPoint + 1, size - insertionPoint);
+            // Insert the new element at the calculated insertion point
+            elements[insertionPoint] = element;
+        }
         // Increment the size of the set
-        size_++;
-        // Insert the new element at the calculated insertion point
-        elements[insertionPoint]=element;
+        size++;
 
         return true; //Return element was added
     }
@@ -276,26 +184,13 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
      */
     @Override
     public boolean addAll(Collection<? extends E> elements) {
-        //fixme add in
-        // int original size = this.size()
-        //add in iterator object
-        //while (iterator.hasNext(){E element = elementsIterator.next();
-        //if(!this.contains(element)
-        //this.add(element);
-        //}
-
-        //int finalsize
-        //if finalsize>originalsize, return true
-
-        boolean setChanged = false;
-
+     int originalSize = size();
         for (E element : elements) {
-            if (add(element)) {
+                add(element);
                 // If at least one element is added, setChanged is true
-                setChanged = true;
-            }
         }
-        return setChanged;
+       int finalSize = size();
+        return finalSize >originalSize ;
     }
 
 
@@ -306,19 +201,15 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
     @Override
     public void clear() {
         // Set all elements to null and reset the size to 0
-        for (int i = 0; i < size; i++) {
-            elements[i] = null;
-        }
-        size = 0;
+        this.capacity=10;
+        this.elements = (E[]) new Object[capacity];
+//        this.comparator = null;
+        this.size=0;
     }
-
-
 
     public E[] getSet(){
         return elements;
     }
-
-
 
 
     /**
@@ -329,7 +220,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
     public boolean contains(E element) {
         // Check if the element is present in the set using binary search
         int index = binarySearch(element);
-        return index >= 0;
+        return  index < size && compareWithEither(element, elements[index]) == 0 ;
     }
 
 
@@ -366,18 +257,18 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
      */
     @Override
     public boolean remove(E element) {
+        if(!contains(element)){
+            return false;
+        }
         int index = binarySearch(element);
 
         if (index >= 0) {
             // Element found, remove it
             System.arraycopy(elements, index + 1, elements, index, size - index - 1);
             elements[--size] = null; // Set the last element to null
-            size--;
             return true;
-        } else {
-            // Element not found
-            return false;
         }
+        return false;
     }
 
 
@@ -390,16 +281,14 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
      */
     @Override
     public boolean removeAll(Collection<? extends E> elements) {
-        boolean setChanged = false;
+        int originalSize = size();
 
-        for (E element : elements) {
-            if (remove(element)) {
-                // If at least one element is removed, setChanged is true
-                setChanged = true;
+        for (E obj : elements) {
+            remove(obj);
             }
-        }
+        int finalSize = size();
 
-        return setChanged;
+        return finalSize<originalSize;
     }
 
 
@@ -419,7 +308,7 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
     @Override
     public E[] toArray() {
         E[] result = (E[]) new Object[size];
-        System.arraycopy(elements, 0, result, 0, size);
+        System.arraycopy(elements, 0, result,0, size);
         return result;
     }
 
@@ -432,38 +321,39 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
      */
     //this is a nested and inner class that is attached to a certain collection
 
-
         // Implement your inner class for the iterator
         private class SetIterator implements Iterator<E> {
-            private int nextIndex = -1;
+            private int nextIndex;
 
             @Override
-            public boolean hasNext() {return (nextIndex+1) < size;}
+            public boolean hasNext() {
+                return nextIndex < size;}
 
             @Override
             public E next() {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                nextIndex++;
                 return elements[nextIndex++];
             }
 
-            //FIXME
             @Override
             public void remove(){
-                if(nextIndex<0 ||nextIndex>size){
-                    throw new IllegalArgumentException("Remove function not able to find index");
+                // check if user called next, throw exception
+                if (nextIndex == 0 || nextIndex > (size+1)) {
+                    throw new IllegalStateException("next method has not been called");
                 }
-                //tODO write a getter function
-                //E element = get(nextIndex);
-               // BinarySearchSet.this.remove(element);
-
-                size--;
+                //get the element that was most recently returned by the next()
+                E obj = get(nextIndex - 1);
+                //remove element
+                BinarySearchSet.this.remove(obj);
+                //position is decremented so that the iterator is correctly positioned after the removal of the element
+                nextIndex--;
+            }
 
 
             }
-        }
+
     /**
      * @return an iterator over the elements in this set, where the elements are
      *         returned in sorted (ascending) order
@@ -471,6 +361,14 @@ public class BinarySearchSet<E> implements SortedSet<E>, Iterable<E> {
     @Override
     public Iterator<E> iterator() {
         return new SetIterator();
+    }
+
+    //Returns an element from the set (for testing)
+    public E get(int i) {
+        if (i < 0 || i >= size) {
+            throw new IndexOutOfBoundsException("Index " + i + " is out of bounds for BinarySearchSet");
+        }
+        return elements[i];
     }
 
 
