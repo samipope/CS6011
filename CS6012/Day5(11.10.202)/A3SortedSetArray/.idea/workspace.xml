@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c1e7221d-c97c-4cb3-b895-9ab8ec27353e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../A4QuickAndMergeSort/src/assignment04/TimingExperiments.java" beforeDir="false" afterPath="$PROJECT_DIR$/../A4QuickAndMergeSort/src/assignment04/TimingExperiments.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JUnit5 Test Class" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2Y66DZ4YiyAIO9AZxxYCFSfeVIj" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/samanthapope/6011GitHub/Github/CS6012/Day5(11.10.202)/A3SortedSetArray/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="assignment03" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="assignment03" />
+    </key>
+  </component>
+  <component name="RunManager" selected="JUnit.BinarySearchSetTest">
+    <configuration name="BinarySearchSetTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A3SortedSetArray" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="assignment03.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="assignment03" />
+      <option name="MAIN_CLASS_NAME" value="assignment03.BinarySearchSetTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BinarySearchSetTest.add" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A3SortedSetArray" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="assignment03.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="assignment03" />
+      <option name="MAIN_CLASS_NAME" value="assignment03.BinarySearchSetTest" />
+      <option name="METHOD_NAME" value="add" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BinarySearchSetTest.removeAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A3SortedSetArray" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="assignment03.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="assignment03" />
+      <option name="MAIN_CLASS_NAME" value="assignment03.BinarySearchSetTest" />
+      <option name="METHOD_NAME" value="removeAll" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BinarySearchSetTest.toArray" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A3SortedSetArray" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="assignment03.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="assignment03" />
+      <option name="MAIN_CLASS_NAME" value="assignment03.BinarySearchSetTest" />
+      <option name="METHOD_NAME" value="toArray" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BinarySearchSetTest.toArrayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A3SortedSetArray" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="assignment03.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="assignment03" />
+      <option name="MAIN_CLASS_NAME" value="assignment03.BinarySearchSetTest" />
+      <option name="METHOD_NAME" value="toArrayTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.BinarySearchSetTest" />
+        <item itemvalue="JUnit.BinarySearchSetTest.add" />
+        <item itemvalue="JUnit.BinarySearchSetTest.removeAll" />
+        <item itemvalue="JUnit.BinarySearchSetTest.toArrayTest" />
+        <item itemvalue="JUnit.BinarySearchSetTest.toArray" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c1e7221d-c97c-4cb3-b895-9ab8ec27353e" name="Changes" comment="" />
+      <created>1699833563268</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699833563268</updated>
+      <workItem from="1699833564296" duration="22697000" />
+      <workItem from="1699878942822" duration="8628000" />
+      <workItem from="1699890998409" duration="130000" />
+      <workItem from="1699898847848" duration="4595000" />
+      <workItem from="1699910575459" duration="9030000" />
+      <workItem from="1699920116797" duration="7419000" />
+      <workItem from="1699987420921" duration="2181000" />
+      <workItem from="1700003920674" duration="724000" />
+      <workItem from="1700016647065" duration="4040000" />
+      <workItem from="1700022631953" duration="20000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="assignment03.BinarySearchSet" memberName="elements" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+</project>

@@ -1,9 +1,9 @@
 package assignment04;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Random;
+import java.lang.reflect.Array;
+import java.util.*;
+
+//Elisabeth Frischknecht and Sami Pope
 
 public class SortUtil <T> {
 
@@ -19,92 +19,52 @@ public class SortUtil <T> {
     }
 
     private static <T> void mergesortRecursive(ArrayList<T> array, int start, int end, Comparator<? super T> comparator){
-        int threshold = 0 ;
+        int threshold = 20 ;
         if( (end - start) < threshold){
             insertionSort(array,comparator,start,end);
         }
         else if(start<end){
 
-            int middle = (start +end)/2;
+            int middle = (start + end)/2;
             mergesortRecursive(array, start, middle, comparator);
             mergesortRecursive(array, (middle+1), end, comparator);
             merge(array, start, middle, end, comparator);
         }
     }
-//
-//    //(start<end)
 
-    public static <T> void merge(ArrayList<T> array,int start, int middle, int end, Comparator<? super T> comparator){
+    //(start<end)
+
+    public static <T> void merge(ArrayList<T> list,int start, int middle, int end, Comparator<? super T> comparator){
         ArrayList<T> temp = new ArrayList<T>();
-//        int i1 = start;
-//        int i2= middle;
-//
-//        while(i1 <= middle && i2 <= end){
-//            if(comparator.compare(list.get(i1),list.get(i2)) <= 0){
-//                temp.add(list.get(i1));
-//                i1++;
-//            }
-//            else{
-//                temp.add(list.get(i2));
-//                i2++;
-//            }
-//
-//        }
-//        //finish off with whatever is left
-//        while(i1 < middle){
-//            temp.add(list.get(i1));
-//            i1++;
-//        }
-//        while(i2 <= end){
-//            temp.add(list.get(i2));
-//            i2++;
-//        }
-//        //int index = 0;
-//        for(int i = start, index =  0; index < temp.size(); i++, index++){
-//            T tempElement = temp.get(index);
-//            list.set(i,tempElement);
-//        }
+        int i1 = start;
 
-        T[] leftArray = (T[]) new Comparable[middle - start + 1];
-        T[] rightArray = (T[]) new Comparable[end - middle];
+        int i2;
+        i2 = middle+1;
 
-        for (int i = 0; i < leftArray.length; i++) {
-            leftArray[i] = array.get(start + i);
-        }
 
-        for (int i = 0; i < rightArray.length; i++) {
-            rightArray[i] = array.get(middle + 1 + i);
-        }
-
-        int leftIndex = 0, rightIndex = 0;
-
-        int currentIndex = start;
-
-        while (leftIndex < leftArray.length && rightIndex < rightArray.length) {
-
-            if (comparator.compare(leftArray[leftIndex], rightArray[rightIndex]) <= 0) {
-                array.set(currentIndex, leftArray[leftIndex]);
-                leftIndex++;
-            } else {
-                array.set(currentIndex, rightArray[rightIndex]);
-                rightIndex++;
+        while(i1 <= middle && i2 <= end){
+            if(comparator.compare(list.get(i1),list.get(i2)) <= 0){
+                temp.add(list.get(i1));
+                i1++;
             }
-            currentIndex++;
+            else{
+                temp.add(list.get(i2));
+                i2++;
+            }
+
         }
 
-        while (leftIndex < leftArray.length) {
-            array.set(currentIndex++, leftArray[leftIndex++]);
+        //finish off with whatever is left
+        while(i1 <= middle){
+            temp.add(list.get(i1++));
+        }
+        while(i2 <= end){
+            temp.add(list.get(i2++));
         }
 
-        while (rightIndex < rightArray.length) {
-            array.set(currentIndex++, rightArray[rightIndex++]);
+        for(int i = start, index = 0; index < temp.size(); i++, index++){
+            list.set(i,temp.get(index));
         }
-
-
-
-
-
-
 
     }
 
@@ -115,19 +75,14 @@ public class SortUtil <T> {
      * @param <T>
      */
     public static <T> void insertionSort(ArrayList<T> list, Comparator<? super T> comparator, int start, int end){
-
-        //int n = list.size();
-
-        for (int j = start+1; j <= end; j++) {
-            T temp = list.get(j);
-            int i = j-1;
-            while ( (i > -1) && ( comparator.compare(list.get(i),temp) > 0) ) {
-                list.set(i+1,list.get(i));
-                i--;
+        
+        for(int i = start + 1; i <= end; i++){
+            for(int j = i; j > start && (comparator.compare(list.get(j),list.get(j-1)) < 0);j-- ){
+                T temp = list.get(j);
+                list.set(j, list.get(j - 1));
+                list.set(j - 1, temp);
             }
-            list.set(i+1,temp);
         }
-
     }
 
     /**
@@ -151,14 +106,15 @@ public class SortUtil <T> {
 
      */
     private static <T> void recursiveQuicksort(ArrayList<T> list, Comparator<? super T> comparator, int beg, int end){
-        //base case
-        int pivot = beg;
         //pick a pivot
         if(beg < end){
+//            int pivot = getRandomPivot(beg,end);
+           // Uncomment next line to use Approxmedian as the pivot point:
+          int pivot = getPivotFromApproxMedian(list,beg+1,end-1,comparator);
             int breakpoint = partition(list, beg, end, pivot, comparator);
-            //left hand side, should go from 0 to breakpoint+1
+            //left hand side, should go from 0 to breakpoint-1
             recursiveQuicksort(list,comparator,beg,breakpoint-1);
-            //right hand side, should go from breakpoint-1 to the end
+            //right hand side, should go from breakpoint+1 to the end
             recursiveQuicksort(list,comparator,breakpoint+1,list.size() - 1);
         }
 
@@ -184,9 +140,10 @@ public class SortUtil <T> {
         list.set(pivot, list.get(end));
         list.set(end, temp);
 
+
         int left = beginning;
         int right;
-
+        
         if(end == 0){
             right = end;
         }
@@ -211,10 +168,11 @@ public class SortUtil <T> {
                 }
             }
             if(left < right){
-                //swap them
+            //    swap them
                 temp = list.get(left);
                 list.set(left, list.get(right));
                 list.set(right, temp);
+
                 left ++;
                 right --;
             }
@@ -222,6 +180,7 @@ public class SortUtil <T> {
                 temp = list.get(left);
                 list.set(left, list.get(end));
                 list.set(end, temp);
+
                 done = true;
             }
 
@@ -268,30 +227,31 @@ public class SortUtil <T> {
 
     /**
      * This function returns the element in the list to be used as a pivot in quicksort. It always returns the beginning of the area to search
-     * @param list
-     *      --the list that we are "getting" the pivot from
      * @param beginning
      *      --the beginning element that we are searching at
      * @return
      */
-    private int getFirstElementPivot(ArrayList<T> list, int beginning){
+    public int getFirstElementPivot(int beginning){
         //helper method that returns the first element in a list
         return beginning;
     }
 
     /**
      * returns a random index to be used as the pivot in quicksort between the beginning and ending values
-     * @param beg
+     * @param
      *      --the first valid index
-     * @param end
+     * @param
      *      --the last valid index
      * @return
      *      --returns a random index between beg and end to be used as a pivot
      * @param <T>
      */
     public static <T> int getRandomPivot(int beg, int end){
-        Random r = new Random();
-        return r.nextInt(beg,end);
+        Random r = new Random(123);
+        if(end - beg > 0){
+            return r.nextInt(end - beg) + beg;
+        }
+        return end;
     }
 
 

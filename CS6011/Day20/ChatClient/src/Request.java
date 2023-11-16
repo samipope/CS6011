@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Request {
     private final Socket socket;
     private final Map<String, String> requestHeader = new HashMap<>();
-    private String fileName = "";
+    private String fileName = "index.html";
     private Boolean isFileValid;
     private String httpVersion = "";
 
@@ -24,7 +24,7 @@ public class Request {
     }
 
     public String getFilePath(String fn) {
-        return "/Users/samanthapope/6011Github/Github/CS6011/Day20/ChatClient/resources" + fn;
+        return "/Users/samanthapope/6011Github/Github/CS6011/Day20/ChatClient/resources/" + fn;
     }
 
     private void checkIfFileExists() {

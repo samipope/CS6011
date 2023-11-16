@@ -254,13 +254,7 @@ public class MyRunnable implements Runnable {
                 }
             }
             else {
-
-                //creates the file that is required to send into the response.sendResponse
-                File file = response.createFile(request.getParameter());
-
-                //sends the response back to the client
-                response.sendHTTPResponse(client_, file, request.getFileType());
-               // client_.close();
+                response.handleResponse();
 
             }
         } catch (Exception e) {

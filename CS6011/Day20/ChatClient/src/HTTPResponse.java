@@ -9,7 +9,7 @@ public class HTTPResponse {
     private final String fileName;
     private final String httpVersion;
     private final Request request;
-    private final String fallback404PageFileName = "/resources/index.html";
+    private final String fallback404PageFileName = "/index.html";
 
     public HTTPResponse(Socket s, Request request) {
         socket = s;
@@ -33,14 +33,13 @@ public class HTTPResponse {
                      <link rel="icon" href="favicon.webp"/>
                      <meta name="viewport" content="width=device-width,initial-scale=1"/>
                      <meta name="theme-color" content="#000000"/>
-                     <meta name="description" content="Lydia Yuan's Profile"/>
+                   
                      <title>404 NOT FOUND</title>
                      <link href="404PageStyle.css" rel="stylesheet">
                  </head>
                  <body>
                  <div id="root">
-                     <div class="App"><img src="profile.svg"
-                                           class="profile-pic" alt="profile pic">
+                  
                          <h2> Hmm... What you want is not here</h2>
                          <h3> Error Message From the Server: </h3>
                          <p>

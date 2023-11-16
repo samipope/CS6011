@@ -1,38 +1,39 @@
 package assignment04;
 
-import java.util.Random;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 public class TimingExperiments {
+    private static final int ITER_COUNT = 10000;
+
     public static void main(String[] args) {
-
         long startTime = System.nanoTime();
-        while (System.nanoTime() - startTime < 1_000_000_000)
-            ;
 
-        Random random = new Random();
-        for (int exp = 10; exp <= 20; exp++) { // This is used as the exponent to calculate the size of the set.
-            int size = (int) Math.pow(2, exp); // or ..
-
-            // Do the experiment multiple times, and average out the results
-            long totalTime = 0;
-
-
-
-                // TIME IT!
-                long start = System.nanoTime();
-                set.reversed();
-
-                long stop = System.nanoTime();
-                totalTime += stop - start;
-            }
-            double averageTime = totalTime / (double) ITER_COUNT;
-            System.out.println(size + "\t" + averageTime); // print to console
-
+        while(System.nanoTime() - startTime < 1000000000L) {
+            // Warm-up phase to ensure JVM optimization doesn't affect timing
         }
 
+//        for(int exp = 1; exp <= 10; ++exp) {
+//            int size = (int) Math.pow(1.0, (double) exp);
+//            long totalTime = 0L;
+
+        for(int size = 0; size <= 100; ++size) {
+            long totalTime = 0L;
 
 
+            for (int iter = 0; iter < ITER_COUNT; ++iter) {
+                // Generate worst case data for each iteration
+                ArrayList<Integer> testing = SortUtil.generateWorstCase(size);
+
+                long start = System.nanoTime();
+                SortUtil.quicksort(testing,Comparator.naturalOrder());
+              //  SortUtil.mergesort(testing, Comparator.naturalOrder());
+                long stop = System.nanoTime();
+
+                totalTime += stop - start;
+            }
+
+            double averageTime = (double) totalTime / ITER_COUNT;
+            System.out.println(size + "\t" + averageTime);
+        }
     }
 }
