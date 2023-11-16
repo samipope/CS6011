@@ -1,7 +1,10 @@
 package assignment04;
 
 import java.lang.reflect.Array;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Random;
 
 //Elisabeth Frischknecht and Sami Pope
 
@@ -75,7 +78,7 @@ public class SortUtil <T> {
      * @param <T>
      */
     public static <T> void insertionSort(ArrayList<T> list, Comparator<? super T> comparator, int start, int end){
-        
+
         for(int i = start + 1; i <= end; i++){
             for(int j = i; j > start && (comparator.compare(list.get(j),list.get(j-1)) < 0);j-- ){
                 T temp = list.get(j);
@@ -106,16 +109,25 @@ public class SortUtil <T> {
 
      */
     private static <T> void recursiveQuicksort(ArrayList<T> list, Comparator<? super T> comparator, int beg, int end){
+        //base case
+        //int pivot = beg;
+        int threshold = 20 ;
+        if( (end - beg) < threshold){
+            insertionSort(list,comparator,beg,end);
+        }
+
         //pick a pivot
         if(beg < end){
-//            int pivot = getRandomPivot(beg,end);
-           // Uncomment next line to use Approxmedian as the pivot point:
-          int pivot = getPivotFromApproxMedian(list,beg+1,end-1,comparator);
+  //          int pivot = (end-beg)/2;
+ //           int pivot = getPivotFromApproxMedian(list, beg + 1, end - 1, comparator);
+//            int pivot = getFirstElementPivot(list, beg);
+//            int pivot = getFirstElementPivot(list, beg);
+            int pivot = getRandomPivot(beg,end);
             int breakpoint = partition(list, beg, end, pivot, comparator);
-            //left hand side, should go from 0 to breakpoint-1
+            //left hand side, should go from 0 to breakpoint+1
             recursiveQuicksort(list,comparator,beg,breakpoint-1);
-            //right hand side, should go from breakpoint+1 to the end
-            recursiveQuicksort(list,comparator,breakpoint+1,list.size() - 1);
+            //right hand side, should go from breakpoint-1 to the end
+            recursiveQuicksort(list,comparator,breakpoint+1,end);
         }
 
     }
@@ -143,7 +155,7 @@ public class SortUtil <T> {
 
         int left = beginning;
         int right;
-        
+
         if(end == 0){
             right = end;
         }
@@ -168,11 +180,10 @@ public class SortUtil <T> {
                 }
             }
             if(left < right){
-            //    swap them
+                //swap them
                 temp = list.get(left);
                 list.set(left, list.get(right));
                 list.set(right, temp);
-
                 left ++;
                 right --;
             }
@@ -180,7 +191,6 @@ public class SortUtil <T> {
                 temp = list.get(left);
                 list.set(left, list.get(end));
                 list.set(end, temp);
-
                 done = true;
             }
 
@@ -227,20 +237,22 @@ public class SortUtil <T> {
 
     /**
      * This function returns the element in the list to be used as a pivot in quicksort. It always returns the beginning of the area to search
+     * @param list
+     *      --the list that we are "getting" the pivot from
      * @param beginning
      *      --the beginning element that we are searching at
      * @return
      */
-    public int getFirstElementPivot(int beginning){
+    private static <T> int getFirstElementPivot(ArrayList<T> list, int beginning){
         //helper method that returns the first element in a list
         return beginning;
     }
 
     /**
      * returns a random index to be used as the pivot in quicksort between the beginning and ending values
-     * @param
+     * @param beg
      *      --the first valid index
-     * @param
+     * @param end
      *      --the last valid index
      * @return
      *      --returns a random index between beg and end to be used as a pivot
@@ -261,37 +273,37 @@ public class SortUtil <T> {
      * @param size
      * @return
      */
-   public static ArrayList<Integer> generateBestCase(int size){
-       ArrayList<Integer> result = new ArrayList<>();
+    public static ArrayList<Integer> generateBestCase(int size){
+        ArrayList<Integer> result = new ArrayList<>();
 
-       for(int i = 1; i <= size; i++){
-           result.add(i);
-       }
+        for(int i = 1; i <= size; i++){
+            result.add(i);
+        }
 
-       return result;
-   }
+        return result;
+    }
 
     /**
      * This method generates and returns an ArrayList of integers 1 to size in permuted order (i.e. randomly ordered)
      * @param size
      * @return
      */
-   public static ArrayList<Integer> generateAverageCase(int size){
-       //initiate the array with our best case function
-       ArrayList<Integer> result = generateBestCase(size);
+    public static ArrayList<Integer> generateAverageCase(int size){
+        //initiate the array with our best case function
+        ArrayList<Integer> result = generateBestCase(size);
 
-       Random r = new Random();
-       //shuffle the values of the array randomly
-       for(int i =size-1; i>0;i--) {
-           int j = r.nextInt(i + 1);
+        Random r = new Random();
+        //shuffle the values of the array randomly
+        for(int i =size-1; i>0;i--) {
+            int j = r.nextInt(i + 1);
 
-           int temp = result.get(i);
-           result.set(i, result.get(j));
-           result.set(j, temp);
-       }
+            int temp = result.get(i);
+            result.set(i, result.get(j));
+            result.set(j, temp);
+        }
 
-       return result;
-   }
+        return result;
+    }
 
     /**
      * this method generates and returns an ArrayList of integers 1 to size in descending order
@@ -299,13 +311,13 @@ public class SortUtil <T> {
      * @param size
      * @return
      */
-   public static ArrayList<Integer> generateWorstCase(int size){
-       ArrayList<Integer> result = new ArrayList<>();
-       for(int i = size; i >= 1; i--){
-           result.add(i);
-       }
-       return result;
-   }
+    public static ArrayList<Integer> generateWorstCase(int size){
+        ArrayList<Integer> result = new ArrayList<>();
+        for(int i = size; i >= 1; i--){
+            result.add(i);
+        }
+        return result;
+    }
 
 
 }

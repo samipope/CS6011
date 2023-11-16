@@ -82,6 +82,32 @@ public class MyRunnable implements Runnable {
         return results;
     }
 
+    private void sendMessage(String message) throws IOException {
+        OutputStream out = client_.getOutputStream();
+        byte[] messageBytes = message.getBytes(StandardCharsets.UTF_8);
+
+        int length = messageBytes.length;
+        out.write(0x81); // 0x81 for text frame
+
+        if (length <= 125) {
+            out.write(length);
+        } else if (length <= 65535) {
+            out.write(126);
+            out.write(new byte[] { (byte) (length >> 8), (byte) length });
+        } else {
+            out.write(127);
+            out.write(new byte[] {
+                    (byte) (length >> 56), (byte) (length >> 48),
+                    (byte) (length >> 40), (byte) (length >> 32),
+                    (byte) (length >> 24), (byte) (length >> 16),
+                    (byte) (length >> 8), (byte) length });
+        }
+
+        out.write(messageBytes);
+        out.flush();
+    }
+
+
 
     public static byte[] getResponseFrame(String message) {
         //DataOutputStream dataOut = new DataOutputStream(client_.getOutputStream());
@@ -215,7 +241,7 @@ public class MyRunnable implements Runnable {
     @Override
     public void run() {
         //Create a response object
-        HTTPResponse response = new HTTPResponse();
+        HTTPResponse response = new HTTPResponse(client_);
         //Create a request object which requires a ServerSocket to initialize
         HTTPRequest request = null;
         try {
@@ -238,6 +264,10 @@ public class MyRunnable implements Runnable {
                     //this decodes the packet after the handshake was completed
                     String msg = decodeMessage();
 
+                    if (!msg.equals(endMessage)) {
+                        parseMessType(msg);
+                        sendMessage("Your message was received: " + msg); // Echo the received message
+                    }
                     if( msg.equals(endMessage)){
                         System.out.println("closing socket");
                         done = true;
@@ -259,11 +289,7 @@ public class MyRunnable implements Runnable {
             }
         } catch (Exception e) {
             //if there are any errors above, the error page is sent to site to prevent crashing
-            try {
-                response.sendFailResponse(client_);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            response.write404FallBackPage();
         }
     }
 

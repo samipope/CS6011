@@ -5,88 +5,42 @@ import java.net.Socket;
 import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.util.Base64;
-import java.util.ArrayList;
-import java.nio.charset.StandardCharsets;
 
 public class HTTPResponse {
 
-    private final String fallback404PageFileName = "/resources/index.html";
+    private Socket socket;
 
 
-
-    public HTTPResponse() {
+    public HTTPResponse(Socket socket) {
+        this.socket = socket;
 
     }
 
     private String getFinalFilePath() {
-        // if the file does not exist, return 404 fall back page
+        // If the file does not exist, return 404 fallback page
         return "src/ErrorPage.html";
     }
 
     private String getFallBackPageHTML(String errorMessage) {
-        return """
-                <!doctype html>
-                 <html lang="en">
-                 <head>
-                     <meta charset="utf-8"/>
-                     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-                     <meta name="theme-color" content="#000000"/>
-                     <meta name="description" content="Lydia Yuan's Profile"/>
-                     <title>404 NOT FOUND</title>
-                 </head>
-                 <body>
-                         <h3> Error Message From the Server: </h3>
-                         <p>
-                          """ +
-                errorMessage
-                +
-                """
-                        </p>
-                         
-                        </body>
-                        </html>
-                        """;
+        return "<!doctype html>\n" +
+                "<html lang=\"en\">\n" +
+                "<head>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "    <h3>Error Message From the Server:</h3>\n" +
+                "    <p>" + errorMessage + "</p>\n" +
+                "</body>\n" +
+                "</html>";
     }
 
-    private void write404fallbackPage() {
-        try {
-            new FileInputStream(request.getFilePath(fileName));
-        } catch (FileNotFoundException e) {
-            try {
-                FileWriter fileWriter = new FileWriter(request.getFilePath(fallback404PageFileName));
-                fileWriter.write(getFallBackPageHTML(e.getMessage()));
-                fileWriter.flush();
-                fileWriter.close();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-                ex.printStackTrace();
-            }
-        }
-    }
 
-    private String getStatusCodeInfo() {
-        String statusCodeInfo = isFileValid ? "200 OK" : "404 NOT FOUND";
-        return httpVersion + " " + statusCodeInfo;
-    }
 
-    private String getContentType() {
-        File file = new File(getFinalFilePath());
-        String fileContentType = "";
-        try {
-            fileContentType = Files.probeContentType(file.toPath());
-        } catch (IOException e) {
-            System.out.println("Failed: unknown content of " + fileName);
-            e.printStackTrace();
-        }
-        return "content-type: " + fileContentType;
-    }
 
-    private void sendResponseHeader(PrintWriter printWriter) {
-        if (!isFileValid) write404fallbackPage();
-        printWriter.println(getStatusCodeInfo());
-        printWriter.println(getContentType());
-        // add blank line to indicate the start of the requested file content
-        printWriter.println("");
+    private void sendResponseHeader(PrintWriter printWriter, String statusCode, String contentType) {
+        printWriter.println("HTTP/1.1 " + statusCode);
+        printWriter.println("Content-Type: " + contentType);
+        printWriter.println("Connection: close");
+        printWriter.println();
     }
 
     private void sendResponseBody(OutputStream socketOutputStream) {
@@ -95,75 +49,40 @@ public class HTTPResponse {
             finalFileStream.transferTo(socketOutputStream);
             finalFileStream.close();
         } catch (IOException e) {
-            // if the file does not exist then return a fallback page to display server error message
+            // If the file does not exist, return a fallback page to display a server error message
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
 
-    private void sendResponse(Socket socket) {
+
+    public void handleResponse() {
         try {
             OutputStream socketOutputStream = socket.getOutputStream();
             PrintWriter printWriter = new PrintWriter(socketOutputStream, true);
-            sendResponseHeader(printWriter);
-            //Pause for 1 second
-            Thread.sleep(1000);
-            sendResponseBody(socketOutputStream);
+
+            // Check if the file is valid and exists
+            //Users/samanthapope/6011GitHub/Github/CS6011/Day20/untitled/src/
+            File file = new File("/Users/samanthapope/6011GitHub/Github/CS6011/Day20/untitled/src");
+            if (file.exists() && !file.isDirectory()) {
+                // File exists, serve it
+                sendResponseHeader(printWriter, "200 OK", "text/html");
+                Files.copy(file.toPath(), socketOutputStream);
+            } else {
+                // File not found, serve 404 response
+                sendResponseHeader(printWriter, "404 Not Found", "text/html");
+                printWriter.println(getFallBackPageHTML("File not found."));
+            }
+
             printWriter.close();
             socketOutputStream.close();
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
             e.printStackTrace();
         }
     }
 
-    public void handleResponse() {
-        sendResponse(socket);
-    }
-
-
-
-
-
-
-
-
-
-    //createFile takes in a string as the name of the file and then returns a file
-    public File createFile(String filename){
-
-        return new File ("src/" + filename);
-    }
-//
-//    /*sendResponse creates an OutputStream from the socket, passes a file into FileInputStream,
-//    and sends a header based on the filetype.*/
-//    public void sendHTTPResponse (Socket client, File file, String fileType) throws IOException {
-//        OutputStream outStream = client.getOutputStream();
-//
-//        FileInputStream fileStream = null;
-//        if( fileType != null )
-//            fileStream = new FileInputStream(file);
-//        outStream.write("http/1.1 200 Success \n".getBytes());
-//        if (fileType.equals("jpeg")) {
-//            outStream.write(("Content-type: image/" + fileType + "\n").getBytes());
-//        }
-//        else if (fileType.equals("pdf")) {
-//            outStream.write(("Content-type: application/" + fileType + "\n").getBytes());
-//        }
-//        else {
-//            outStream.write(("Content-type: text/" + fileType + "\n").getBytes());
-//        }
-//        outStream.write("\n".getBytes());
-//        fileStream.transferTo(outStream);
-//
-//        outStream.flush();
-//        outStream.close();
-//    }
-//
-//
-//
-//
-    public void sendWebSockHandshake(Socket client, String key) throws IOException {
+    public static void sendWebSockHandshake(Socket client, String key) throws IOException {
         OutputStream outStream = client.getOutputStream();
 
         // Compute the Sec-WebSocket-Accept response for the key
@@ -186,21 +105,15 @@ public class HTTPResponse {
         outStream.flush();
     }
 
-    //sendFailResponse requires a socket and sends the fail html file to the client
-    public void sendFailResponse(Socket client) throws IOException {
-        File failFile = new File ("src/ErrorPage.html");
-        OutputStream outStream = client.getOutputStream();
-        FileInputStream failFileStream = new FileInputStream(failFile);
-
-        outStream.write("HTTP/1.1 200 OK\n".getBytes());
-        outStream.write("Content-type: text/html\n".getBytes());
-        outStream.write("\n".getBytes("UTF-8"));
-        failFileStream.transferTo(outStream);
-        outStream.flush();
-        outStream.close();
-
+    public void write404FallBackPage() {
+        try {
+            FileWriter fileWriter = new FileWriter(getFinalFilePath());
+            fileWriter.write(getFallBackPageHTML("File not found."));
+            fileWriter.flush();
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
-
-
-
 }

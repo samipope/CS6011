@@ -12,21 +12,21 @@ public class TimingExperiments {
             // Warm-up phase to ensure JVM optimization doesn't affect timing
         }
 
-//        for(int exp = 1; exp <= 10; ++exp) {
-//            int size = (int) Math.pow(1.0, (double) exp);
-//            long totalTime = 0L;
-
-        for(int size = 0; size <= 100; ++size) {
+        for(int exp = 0; exp <= 13; ++exp) {
+            int size = (int) Math.pow(2.0, (double) exp);
             long totalTime = 0L;
+
+//        for(int size = 0; size <= 10000; ++size) {
+//            long totalTime = 0L;
 
 
             for (int iter = 0; iter < ITER_COUNT; ++iter) {
                 // Generate worst case data for each iteration
-                ArrayList<Integer> testing = SortUtil.generateWorstCase(size);
+                ArrayList<Integer> testing = SortUtil.generateAverageCase(size);
 
                 long start = System.nanoTime();
-                SortUtil.quicksort(testing,Comparator.naturalOrder());
-              //  SortUtil.mergesort(testing, Comparator.naturalOrder());
+          //   SortUtil.quicksort(testing,Comparator.naturalOrder());
+            SortUtil.mergesort(testing, Comparator.naturalOrder());
                 long stop = System.nanoTime();
 
                 totalTime += stop - start;
