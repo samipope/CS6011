@@ -93,20 +93,19 @@ public class MyRunnable implements Runnable {
             out.write(length);
         } else if (length <= 65535) {
             out.write(126);
-            out.write(new byte[] { (byte) (length >> 8), (byte) length });
+            out.write(new byte[]{(byte) (length >> 8), (byte) length});
         } else {
             out.write(127);
-            out.write(new byte[] {
+            out.write(new byte[]{
                     (byte) (length >> 56), (byte) (length >> 48),
                     (byte) (length >> 40), (byte) (length >> 32),
                     (byte) (length >> 24), (byte) (length >> 16),
-                    (byte) (length >> 8), (byte) length });
+                    (byte) (length >> 8), (byte) length});
         }
 
         out.write(messageBytes);
         out.flush();
     }
-
 
 
     public static byte[] getResponseFrame(String message) {
@@ -160,80 +159,47 @@ public class MyRunnable implements Runnable {
     }
 
 
-//    public void encodeMessage(String response) throws IOException {
-//        System.out.println("send response: " + response);
-//        OutputStream out = null;
-//        try {
-//            out = client_.getOutputStream();
-//            PrintWriter printWriter = new PrintWriter(out, true);
-//            sendResponseHeader(printWriter);
-//            Thread.sleep(1000);
-//            sendResponseBody(out);
-//            printWriter.close();
-//
-//        } catch (IOException e) {
-//            System.out.println(e.getMessage());
-//            e.printStackTrace();
-//        }
-//        assert out != null;
-//        out.write(getResponseFrame(response));
-//
-//
-//        // Construct a WebSocket text frame
-//        byte[] frame = new byte[messageBytes.length + 2];
-//        frame[0] = (byte) 0x81;  // Text frame opcode
-//        frame[1] = (byte) messageBytes.length;  // Length of the message
-//
-//        System.arraycopy(messageBytes, 0, frame, 2, messageBytes.length);
-//
-//        dataOut.write(frame);
-//        dataOut.flush();
-//    } catch(
-//    IOException e)
-//
-//    {
-//        e.printStackTrace();
-//    }
-//
-//}
-
     private void parseMessType(String message) throws IOException {
         String cmd_;
         String[] messArr = message.split(":");
         cmd_ = messArr[0];
-        username_=messArr[1];
-        roomName_=messArr[2];
-        if(cmd_.equals("join")){
+        username_ = messArr[1];
+        roomName_ = messArr[2];
+        if (cmd_.equals("join")) {
             rm_.joinRoom(this);
-            System.out.println("This is the room they are trying to join"+ rm_);
+            System.out.println("This is the room they are trying to join" + rm_);
         }
-        if (cmd_.equals("leave")){
+        if (cmd_.equals("leave")) {
             rm_.leaveRoom(this);
             System.out.println("this is the room they are trying to leave:" + rm_);
         }
-        if (cmd_.equals("message")){
-            message_=messArr[3];
+        if (cmd_.equals("message")) {
+            message_ = messArr[3];
             rm_.sendMess(message_, this);
             System.out.println("this is the message user is sending:" + message_);
         }
     }
 
-    public String getUsername_(){
+    public String getUsername_() {
         return username_;
     }
-    public String getRoomName_(){
+
+    public String getRoomName_() {
         return roomName_;
     }
-    public String getMessage_(){
+
+    public String getMessage_() {
         return message_;
     }
 
-    public static String makeJoinMsg(String room, String name){
+    public static String makeJoinMsg(String room, String name) {
         return "{ \"type\": \"join\", \"room\": \"" + room + "\", \"user\": \"" + name + "\" }";
     }
+
     public static String makeMsgMsg(String room, String name, String message) {
         return "{ \"type\": \"message\", \"user\": \"" + name + "\", \"room\": \"" + room + "\", \"message\": \"" + message + "\" }";
     }
+
     public static String makeLeaveMsg(String room, String name) {
         return "{ \"type\": \"leave\", \"room\": \"" + room + "\", \"user\": \"" + name + "\" }";
     }
@@ -257,34 +223,36 @@ public class MyRunnable implements Runnable {
 
             if (request.isWebSocket()) {
                 response.sendWebSockHandshake(client_, request.getWebSocketKey());
-                String endMessage = new String(new byte[]{3,-23});
+                String endMessage = new String(new byte[]{3, -23});
                 boolean done = false;
                 while (!done) {
 
                     //this decodes the packet after the handshake was completed
                     String msg = decodeMessage();
 
-                    if (!msg.equals(endMessage)) {
-                        parseMessType(msg);
-                        sendMessage("Your message was received: " + msg); // Echo the received message
-                    }
-                    if( msg.equals(endMessage)){
+                    parseMessType(msg);
+
+
+
+//                    if (!msg.equals(endMessage)) {
+//                        parseMessType(msg);
+                        sendMessage("Your message was received: hello from server " + msg); // Echo the received message
+                   // }
+                    if (msg.equals(endMessage)) {
                         System.out.println("closing socket");
                         done = true;
 
                         //This leave room does the wrong name?
                         rm_.leaveRoom(this);
 
-                       client_.close();
-                    }
-                    else{
+                        client_.close();
+                    } else {
                         parseMessType(msg);
                     }
 
                 }
-            }
-            else {
-                response.handleResponse();
+            } else {
+                response.handleResponse(request);
 
             }
         } catch (Exception e) {
@@ -293,7 +261,12 @@ public class MyRunnable implements Runnable {
         }
     }
 
+
+
+
 }
+
+
 
 
 

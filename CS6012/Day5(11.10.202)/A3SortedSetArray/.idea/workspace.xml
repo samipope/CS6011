@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1e7221d-c97c-4cb3-b895-9ab8ec27353e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../A4QuickAndMergeSort/src/assignment04/TimingExperiments.java" beforeDir="false" afterPath="$PROJECT_DIR$/../A4QuickAndMergeSort/src/assignment04/TimingExperiments.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day10(11.17.2023)/A5LinkedList/src/assignment05/LinkedListStack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day10(11.17.2023)/A5LinkedList/src/assignment05/List.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day10(11.17.2023)/A5LinkedList/src/assignment05/SinglyLinkedList.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day10(11.17.2023)/A5LinkedList/src/assignment05/SinglyLinkedListTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Day10(11.17.2023)/A5LinkedList/src/assignment05/WebBrowser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/ErrorPage.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/ErrorPage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/ServerClient/ChatRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/ServerClient/ChatRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/ServerClient/HTTPResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/ServerClient/HTTPResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/ServerClient/MyRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/ServerClient/MyRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/chat.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/chat.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../CS6011/Day20/untitled/src/chat.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,30 +43,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/samanthapope/6011GitHub/Github/CS6012/Day5(11.10.202)/A3SortedSetArray/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Downloaded.Files.Path.Enabled": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "create.test.in.the.same.root": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/samanthapope/6011GitHub/Github/CS6012/Day5(11.10.202)/A3SortedSetArray",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "onboarding.tips.debug.path": "/Users/samanthapope/6011GitHub/Github/CS6012/Day5(11.10.202)/A3SortedSetArray/src/Main.java",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -176,6 +187,7 @@
       <workItem from="1700003920674" duration="724000" />
       <workItem from="1700016647065" duration="4040000" />
       <workItem from="1700022631953" duration="20000" />
+      <workItem from="1700249079853" duration="32000" />
     </task>
     <servers />
   </component>

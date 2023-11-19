@@ -49,14 +49,27 @@ const usernameValue = username.value;
 function sendMessage() {
 
     if (wsOpen) {
+        if(userJoined) {
+            //lets a message get sent
+            ws.send('message ' + message1.value);
+            console.log('message ' + message1.value);
+            let messagePar = document.getElementById("Messages");
+            let msgElement = document.createElement("p");
+            msgElement.textContent = username.value + ": " + message1.value;
+            messagePar.appendChild(msgElement);
+        }
         if(!userJoined) {
             // lets a person join the chat room
             ws.send('join ' + usernameValue + ' ' + chatroomValue);
             userJoined=true;
+            let peoplePar = document.getElementById("People");
+            let pplElement = document.createElement("x");
+            pplElement.textContent = username.value + " has joined room";
+            let linebreak = document.createElement("br");
+            peoplePar.appendChild(pplElement);
+            peoplePar.appendChild(linebreak);
         }
-        //lets a message get sent
-        ws.send('message ' + message1.value);
-        console.log('message '+ message1.value);
+
     }
     if(!wsOpen){
         //allows a person to leave the chatroom
@@ -78,8 +91,18 @@ function joinRoom() {
             ws.send('join ' + username.value + ' ' + chatroom.value);
             userJoined=true;
         }
+        else if(message1!=null){
         //lets a message get sent
-        //ws.send('message ' + messageValue);
+        ws.send('message ' + message1.value);}
+        let peoplePar = document.getElementById("People");
+        let pplElement = document.createElement("x");
+        pplElement.textContent = username.value + " has joined room";
+        let linebreak = document.createElement("br");
+        peoplePar.appendChild(pplElement);
+        peoplePar.appendChild(linebreak);
+
+
+
     }
     if(!wsOpen){
         //allows a person to leave the chatroom
@@ -132,4 +155,5 @@ message1.addEventListener("keypress", (event) => {
         sendMessage();
     }
 });
+
 

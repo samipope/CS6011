@@ -34,8 +34,6 @@ public class HTTPResponse {
     }
 
 
-
-
     private void sendResponseHeader(PrintWriter printWriter, String statusCode, String contentType) {
         printWriter.println("HTTP/1.1 " + statusCode);
         printWriter.println("Content-Type: " + contentType);
@@ -43,33 +41,36 @@ public class HTTPResponse {
         printWriter.println();
     }
 
-    private void sendResponseBody(OutputStream socketOutputStream) {
-        try {
-            InputStream finalFileStream = new FileInputStream(getFinalFilePath());
-            finalFileStream.transferTo(socketOutputStream);
-            finalFileStream.close();
-        } catch (IOException e) {
-            // If the file does not exist, return a fallback page to display a server error message
-            System.out.println(e.getMessage());
-            e.printStackTrace();
-        }
-    }
+//    private void sendResponseBody(OutputStream socketOutputStream) {
+//        try {
+//            InputStream finalFileStream = new FileInputStream(getFinalFilePath());
+//            finalFileStream.transferTo(socketOutputStream);
+//            finalFileStream.close();
+//        } catch (IOException e) {
+//            // If the file does not exist, return a fallback page to display a server error message
+//            System.out.println(e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
 
 
-    public void handleResponse() {
+    public void handleResponse(HTTPRequest request) {
         try {
             OutputStream socketOutputStream = socket.getOutputStream();
             PrintWriter printWriter = new PrintWriter(socketOutputStream, true);
 
-            // Check if the file is valid and exists
-            //Users/samanthapope/6011GitHub/Github/CS6011/Day20/untitled/src/
-            File file = new File("/Users/samanthapope/6011GitHub/Github/CS6011/Day20/untitled/src");
+            String resourcePath = request.getParameter();
+            if (resourcePath.equals("/")) {
+                resourcePath = "/chat.html"; // Default to chat.html if root is requested
+            }
+
+            File file = new File("resources" + resourcePath);
+            String contentType = determineContentType(resourcePath);
+
             if (file.exists() && !file.isDirectory()) {
-                // File exists, serve it
-                sendResponseHeader(printWriter, "200 OK", "text/html");
+                sendResponseHeader(printWriter, "200 OK", contentType);
                 Files.copy(file.toPath(), socketOutputStream);
             } else {
-                // File not found, serve 404 response
                 sendResponseHeader(printWriter, "404 Not Found", "text/html");
                 printWriter.println(getFallBackPageHTML("File not found."));
             }
@@ -81,6 +82,18 @@ public class HTTPResponse {
             e.printStackTrace();
         }
     }
+
+    private String determineContentType(String resourcePath) {
+        if (resourcePath.endsWith(".css")) {
+            return "text/css";
+        } else if (resourcePath.endsWith(".js")) {
+            return "application/javascript";
+        } else if (resourcePath.endsWith(".html")) {
+            return "text/html";
+        }
+        return "text/plain"; // Default content type
+    }
+
 
     public static void sendWebSockHandshake(Socket client, String key) throws IOException {
         OutputStream outStream = client.getOutputStream();

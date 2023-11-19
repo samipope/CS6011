@@ -30,3 +30,5 @@ public class ChatRoom {private List<MyRunnable> clientArr = new ArrayList<>();
         helperSend(MyRunnable.makeMsgMsg(runnable.getRoomName_(), runnable.getUsername_(), msg));
     }
 }
+
+
