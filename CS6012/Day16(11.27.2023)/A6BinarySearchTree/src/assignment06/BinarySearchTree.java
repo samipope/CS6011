@@ -47,7 +47,7 @@ public class BinarySearchTree<T extends Comparable<? super T>> implements Sorted
             root = new Node<>(item);
             return true;
         }
-        return addRecursive(root, item);
+        return addRecursive(root, item); //allows you to not have to search if it contains?
     }
 
     /**

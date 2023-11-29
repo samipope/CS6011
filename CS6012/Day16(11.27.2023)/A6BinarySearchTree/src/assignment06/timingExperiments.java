@@ -32,11 +32,13 @@ public class timingExperiments {
 
                     ArrayList<Integer> toAdd = new ArrayList<>();
 
+                    ArrayList<Integer> randomtoAdd = new ArrayList<>();
+
                     for (int i = 0; i < size; i++){
 
-                     //   toAdd.add(i);
+                       toAdd.add(i);
 
-                        toAdd.add(random.nextInt(0,100000));
+                        randomtoAdd.add(random.nextInt(0,100000));
 
                       //  int findElement = random.nextInt(size); // This gets me a random int between 0 and size;
 
@@ -46,11 +48,8 @@ public class timingExperiments {
 
                     BinarySearchTree<Integer> MYBINARYTreeSet = new BinarySearchTree<>();
                     TreeSet<Integer> JAVATreeSet = new TreeSet<>();
-                    for(int i = 0; i < size; i++){
-                        MYBINARYTreeSet.add(toAdd.get(i));
-                        JAVATreeSet.add(toAdd.get(i));
-
-                    }
+//                    for(int i = 0; i < size; i++){
+//                    }
 
 
 
@@ -59,7 +58,7 @@ public class timingExperiments {
                     long stop=0;
                    for(int i = 0; i < size; i++) {
                          start = System.nanoTime();
-                        MYBINARYTreeSet.contains(-1);
+                       MYBINARYTreeSet.add(toAdd.get(i));
                         stop = System.nanoTime();
                    }
 
@@ -70,7 +69,7 @@ public class timingExperiments {
                     long stop2 = 0;
                     for(int i = 0; i < size; i++) {
                         start2 = System.nanoTime();
-                        JAVATreeSet.contains(-1);
+                        MYBINARYTreeSet.add(randomtoAdd.get(i));
                         stop2 = System.nanoTime();
                     }
 
