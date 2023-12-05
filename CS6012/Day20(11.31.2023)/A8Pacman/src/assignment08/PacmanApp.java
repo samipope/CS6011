@@ -18,7 +18,7 @@ public class PacmanApp {
     static final int DotRadius = 7;
     public static void main(String[] args) throws IOException {
 
-        var mazeFile = "/Users/samanthapope/6011GitHub/Github/CS6012/Day20(11.31.2023)/A8Pacman/tinyMazeOutput.txt";
+        var mazeFile = "/Users/samanthapope/6011GitHub/Github/CS6012/Day20(11.31.2023)/A8Pacman/demoMazeTest.txt";
         var maze = readMaze(mazeFile);
 
         SwingUtilities.invokeLater(new Runnable() {

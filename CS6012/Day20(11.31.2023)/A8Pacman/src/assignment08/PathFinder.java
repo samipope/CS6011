@@ -37,7 +37,7 @@ public class PathFinder {
             }
         }
 
-        // No path found, output original maze
+        // no path found, give back copy of original maze
         writeMaze(outputFile, maze);
     }
 
@@ -57,7 +57,7 @@ public class PathFinder {
             char[][] maze = new char[height][width];
 
             for (int i = 0; i < height; i++) {
-                maze[i] = br.readLine().toCharArray();
+                maze[i] = br.readLine().toCharArray(); //read in each character
             }
 
             br.close();
@@ -75,10 +75,10 @@ public class PathFinder {
      * @param maze
      * @return
      */
-    private static Point findStart(char[][] maze) {
+    static Point findStart(char[][] maze) {
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[0].length; j++) {
-                if (maze[i][j] == 'S') {
+                if (maze[i][j] == 'S') { //mazes start with S
                     return new Point(i, j);
                 }
             }
@@ -93,15 +93,15 @@ public class PathFinder {
      * @param maze
      * @return list of the point objects of valid neighbors
      */
-    private static List<Point> getNeighbors(Point point, char[][] maze) {
+    static List<Point> getNeighbors(Point point, char[][] maze) {
         List<Point> neighbors = new ArrayList<>();
-        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}; // Right, Down, Left, Up
+        int[][] directions = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}}; // each neighbor, right down left and up
 
-        for (int[] dir : directions) {
+        for (int[] dir : directions) { //for each neighbor
             int newX = point.x + dir[0];
             int newY = point.y + dir[1];
             if (newX >= 0 && newX < maze.length && newY >= 0 && newY < maze[0].length
-                    && maze[newX][newY] != 'X') {
+                    && maze[newX][newY] != 'X') { //check both x and y are in bounds with how big the maze is and that it is not the end
                 neighbors.add(new Point(newX, newY));
             }
         }
@@ -116,7 +116,7 @@ public class PathFinder {
      * @param predecessors
      * @param end
      */
-        private static void markPath ( char[][] maze, Map<Point, Point > predecessors, Point end){
+        static void markPath(char[][] maze, Map<Point, Point> predecessors, Point end){
             Point step = end;
             while (predecessors.containsKey(step)) {
                 Point prev = predecessors.get(step);
@@ -146,7 +146,7 @@ public class PathFinder {
 
         }
 
-        private static class Point {
+        static class Point {
             int x, y;
 
             public Point(int x, int y) {
@@ -154,12 +154,7 @@ public class PathFinder {
                 this.y = y;
             }
 
-            // equals and hashCode methods should be overridden for proper Map functionality
         }
 
-//        public static void main (String[]args){
-//            // Example usage
-//            solveMaze("../mazes/bigMaze.txt", "output.txt");
-//        }
     }
 
