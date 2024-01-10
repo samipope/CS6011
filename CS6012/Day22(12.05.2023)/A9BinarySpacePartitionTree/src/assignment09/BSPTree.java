@@ -3,12 +3,13 @@ package assignment09;
 import java.util.ArrayList;
 
 public class BSPTree {
-//internal node class
+//internal node class----------------------
     private class Node {
         Segment segment;
         Node left;
         Node right;
     }
+
     //member variables (only the root)
     private Node root;
 
@@ -24,6 +25,9 @@ public class BSPTree {
      * should be recursive call
      */
     public BSPTree(ArrayList<Segment> passedList){
+        if(passedList ==null){
+            throw new NullPointerException();
+        }
         for(Segment segment: passedList){
             //insert all the segments in passedList
             insert(segment);
@@ -46,7 +50,7 @@ public class BSPTree {
      * @return
      */
     public Node insert(Node node, Segment segment){
-       //
+
         if(node==null){
             //make a new node
             Node newNode = new Node();
@@ -119,7 +123,6 @@ public class BSPTree {
         if (found == null) {
             found = collision(node.right, query);
         }
-
         return found;
     }
 
