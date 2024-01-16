@@ -1,0 +1,34 @@
+# Compiler and flags
+CXX = c++
+CFLAGS = -c
+LFLAGS = -o
+
+# Source and header files
+CXXSOURCE = Capps.cpp Clothing.cpp Pants.cpp main.cpp
+HEADERS = Clothing.h Caps.h Pants.h
+
+# Object files
+OBJECTS = $(CXXSOURCE:.cpp=.o)
+
+# Rule to print macros
+printM:
+	@echo "Compiler: $(CXX)"
+	@echo "Compiler Flags: $(CFLAGS)"
+	@echo "Linker Flags: $(LFLAGS)"
+	@echo "Source Files: $(CXXSOURCE)"
+	@echo "Header Files: $(HEADERS)"
+
+# Generalized rule for object files
+%.o: %.cpp $(HEADERS)
+	$(CXX) $(CFLAGS) $< -o $@
+
+# Rule to create executable
+myprogram: $(OBJECTS)
+	$(CXX) $(LFLAGS) myprogram $(OBJECTS)
+
+# Clean target
+.PHONY: clean
+clean:
+	rm -f $(OBJECTS) myprogram
+
+

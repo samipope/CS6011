@@ -1,0 +1,31 @@
+#Makefile - builds the CS6015 lab 1 assignment
+#
+#To build a target, enter: make <target>
+#
+#Targets:
+# all- builds everything
+# clean - deletes all .o, .a, binaries, etc
+
+build: myprogram
+
+myprogram: Caps.o Clothing.o Pants.o main.o
+	c++ -o myprogram Caps.o Clothing.o Pants.o main.o
+
+Capps.o: Caps.cpp Caps.h
+	c++ -c Caps.cpp
+
+Clothing.o: Clothing.cpp Clothing.h
+	c++ -c Clothing.cpp
+
+Pants.o: Pants.cpp Pants.h Clothing.h
+	c++ -c Pants.cpp
+
+main.o: main.cpp Clothing.h Caps.h Pants.h
+	c++ -c main.cpp
+
+clean:
+	rm -rf myprogram *.o
+
+run: myprogram
+	./myprogram
+
