@@ -56,7 +56,9 @@ public class parsePingData {
                 //find average and minimum for calculations later
                 double average =  findAverage(TotalTimes);
                 double minimum = findMinimum(TotalTimes);
-                System.out.println("Average: " +average + "\n" + "Minimum: " + minimum);
+                double averageQueingDelay = average - minimum;
+
+                System.out.println("Average: " +average + "\n" + "Minimum: " + minimum + "\n" + "Average Queuing Delay: " +averageQueingDelay);
                 //see image in Question 3 folder to see my work to find the average queuing delay 
         }
     }
