@@ -1,0 +1,67 @@
+ 1  10.18.128.3 (10.18.128.3)  5.358 ms  4.190 ms  4.352 ms
+ 2  155.99.130.79 (155.99.130.79)  4.021 ms  4.092 ms  3.924 ms
+ 3  * 155.99.130.56 (155.99.130.56)  12.696 ms
+    155.99.130.64 (155.99.130.64)  9.920 ms
+ 4  fw-border-trust.net.utah.edu (199.104.93.30)  6.896 ms
+    fw-border-trust.net.utah.edu (199.104.93.34)  4.103 ms  4.850 ms
+ 5  199.104.93.21 (199.104.93.21)  5.515 ms  5.136 ms  5.213 ms
+ 6  140.197.253.138 (140.197.253.138)  9.138 ms  5.525 ms  7.892 ms
+ 7  ebc-pep-b-179-int.uen.net (140.197.252.85)  7.219 ms  7.261 ms  7.387 ms
+ 8  uvu-pep-b-139-int.uen.net (140.197.252.43)  7.539 ms  7.051 ms  7.080 ms
+ 9  140.197.248.79 (140.197.248.79)  6.898 ms  6.782 ms  7.718 ms
+10  * * *
+11  be-292-ar01.saltlakecity.ut.utah.comcast.net (68.87.170.65)  7.528 ms  7.413 ms  6.796 ms
+12  be-36741-cs04.champa.co.ibone.comcast.net (96.110.43.237)  43.598 ms  44.244 ms  43.394 ms
+13  be-3411-pe11.910fifteenth.co.ibone.comcast.net (96.110.33.126)  44.276 ms
+    be-3212-pe12.910fifteenth.co.ibone.comcast.net (96.110.33.134)  44.304 ms
+    be-3112-pe12.910fifteenth.co.ibone.comcast.net (96.110.33.130)  43.533 ms
+14  * * *
+15  * * *
+16  * * *
+17  * * *
+18  * * *
+ 1  10.18.128.3 (10.18.128.3)  5.164 ms  4.271 ms  5.204 ms
+ 2  155.99.130.77 (155.99.130.77)  6.077 ms  2.894 ms
+    155.99.130.79 (155.99.130.79)  3.304 ms
+ 3  155.99.130.66 (155.99.130.66)  3.904 ms  63.564 ms
+    155.99.130.58 (155.99.130.58)  49.721 ms
+ 4  fw-border-trust.net.utah.edu (199.104.93.34)  4.233 ms
+    fw-border-trust.net.utah.edu (199.104.93.30)  4.985 ms  12.429 ms
+ 5  199.104.93.21 (199.104.93.21)  5.965 ms  5.963 ms  13.056 ms
+ 6  140.197.253.138 (140.197.253.138)  5.604 ms  8.957 ms  11.116 ms
+ 7  ebc-pep-b-179-int.uen.net (140.197.252.85)  7.643 ms  6.796 ms  7.565 ms
+ 8  uvu-pep-b-139-int.uen.net (140.197.252.43)  7.066 ms  6.705 ms  31.218 ms
+ 9  140.197.248.79 (140.197.248.79)  8.075 ms  7.261 ms  7.117 ms
+10  * * *
+11  be-292-ar01.saltlakecity.ut.utah.comcast.net (68.87.170.65)  28.006 ms  8.551 ms  7.395 ms
+12  be-36711-cs01.champa.co.ibone.comcast.net (96.110.43.225)  44.538 ms
+    be-36721-cs02.champa.co.ibone.comcast.net (96.110.43.229)  46.301 ms
+    be-36741-cs04.champa.co.ibone.comcast.net (96.110.43.237)  46.202 ms
+13  be-3111-pe11.910fifteenth.co.ibone.comcast.net (96.110.33.114)  42.906 ms  43.552 ms
+    be-3312-pe12.910fifteenth.co.ibone.comcast.net (96.110.33.138)  42.776 ms
+14  * * *
+15  * * 1  10.18.128.3 (10.18.128.3)  4.671 ms  4.084 ms  4.148 ms
+ 2  155.99.130.79 (155.99.130.79)  4.668 ms
+    155.99.130.77 (155.99.130.77)  4.406 ms  4.153 ms
+ 3  155.99.130.56 (155.99.130.56)  3.813 ms *
+    155.99.130.66 (155.99.130.66)  10.733 ms
+ 4  fw-border-trust.net.utah.edu (199.104.93.30)  4.071 ms
+    fw-border-trust.net.utah.edu (199.104.93.34)  3.924 ms  4.248 ms
+ 5  199.104.93.21 (199.104.93.21)  5.453 ms  5.776 ms  5.983 ms
+ 6  140.197.253.138 (140.197.253.138)  5.762 ms  5.027 ms  5.009 ms
+ 7  ebc-pep-b-179-int.uen.net (140.197.252.85)  6.453 ms  6.355 ms  7.089 ms
+ 8  uvu-pep-b-139-int.uen.net (140.197.252.43)  7.206 ms  7.132 ms  7.272 ms
+ 9  140.197.248.79 (140.197.248.79)  6.736 ms  6.330 ms  6.816 ms
+10  * * *
+11  be-292-ar01.saltlakecity.ut.utah.comcast.net (68.87.170.65)  13.168 ms  6.520 ms  7.950 ms
+12  be-36711-cs01.champa.co.ibone.comcast.net (96.110.43.225)  44.943 ms
+    be-36721-cs02.champa.co.ibone.comcast.net (96.110.43.229)  45.130 ms
+    be-36741-cs04.champa.co.ibone.comcast.net (96.110.43.237)  45.436 ms
+13  be-3312-pe12.910fifteenth.co.ibone.comcast.net (96.110.33.138)  43.848 ms
+    be-3411-pe11.910fifteenth.co.ibone.comcast.net (96.110.33.126)  44.008 ms
+    be-3112-pe12.910fifteenth.co.ibone.comcast.net (96.110.33.130)  43.529 ms
+14  * * *
+15  * * *
+16  * * *
+17  * * *
+18  * now the next request is at a different time period
