@@ -34,7 +34,10 @@ public class DNSServer {
     public static void main(String[] args) {
         System.out.println("Listening on port: " + SERVER_PORT);
 
-        try (DatagramSocket socket = new DatagramSocket(SERVER_PORT)) {
+        try  {
+
+            DatagramSocket socket = new DatagramSocket(SERVER_PORT);
+            DatagramSocket googleSocket = new DatagramSocket();
             while (true) {
                 byte[] buffer = new byte[BUFFER_SIZE];
                 DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
@@ -44,27 +47,31 @@ public class DNSServer {
                 DNSMessage responseMessage = new DNSMessage(); // Initialize an empty response message
 
                 for (DNSQuestion question : requestMessage.getQuestions()) {
-                    DNSRecord record = cache.query(question);
+                    DNSRecord record = DNSCache.query(question);
                     if (record != null && !record.isExpired()) {
                         // If cached answer is found and not expired, use it
                         responseMessage = DNSMessage.buildResponse(requestMessage, new DNSRecord[]{record});
                     } else {
                         // Else, forward the request to Google's DNS
                         InetAddress googleDNS = InetAddress.getByName(GOOGLE_DNS_ADDRESS);
-                        DatagramPacket forwardPacket = new DatagramPacket(buffer, buffer.length, googleDNS, 53);
-                        socket.send(forwardPacket); // Send request to Google
+                        DatagramPacket forwardPacket = new DatagramPacket(buffer, packet.getLength(), googleDNS, 53);
+                        googleSocket.send(forwardPacket); // Send request to Google
 
                         byte[] responseBuffer = new byte[BUFFER_SIZE];
                         DatagramPacket responsePacket = new DatagramPacket(responseBuffer, responseBuffer.length);
-                        socket.receive(responsePacket); // Receive response from Google
+                        googleSocket.receive(responsePacket); // Receive response from Google
 
                         DNSMessage googleResponse = DNSMessage.decodeMessage(responsePacket.getData());
-                        for (DNSRecord answer : googleResponse.getAnswers()) {
-                            cache.insert(question, answer); // Cache the new answer
+                        if(googleResponse.getAnswers().length!=0) {
+                            for (DNSRecord answer : googleResponse.getAnswers()) {
+                                cache.insert(question, answer); // cache the new answer
+                            }
                         }
-                        responseMessage = googleResponse; // Use Google's response as the response message
+                        responseMessage = googleResponse; // use Google's response as the response message
                     }
                 }
+                System.out.println("here is the cache: "+ cache.getCache());
+
 
                 // Send the response back to the client
                 byte[] responseData = responseMessage.toBytes();
@@ -77,3 +84,6 @@ public class DNSServer {
         }
     }
 }
+
+
+

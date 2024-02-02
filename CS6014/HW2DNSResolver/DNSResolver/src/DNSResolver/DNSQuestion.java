@@ -3,6 +3,7 @@ package DNSResolver;
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class DNSQuestion {
 
@@ -66,25 +67,16 @@ public class DNSQuestion {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o){
-            return true;
-        }
-        if (this.getClass() != o.getClass()){
-            return false;
-        }
-        DNSQuestion question = (DNSQuestion) o;
-        if (this.QClass != question.QClass){
-            return false;
-        }
-        if (this.QType != question.QType){
-            return false;
-        }
-        return Arrays.equals(this.QName, question.QName);
+        if(this==o) return true;
+        if(!(o instanceof DNSQuestion question)) return false;
+        return QType == question.QType && QClass == question.QClass && Arrays.equals(QName, question.QName) && Objects.equals(message, question.message);
 
     }
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        int result = Objects.hash(QType, QClass, message);
+        result = 31* result + Arrays.hashCode(QName);
+        return result;
     }
 }

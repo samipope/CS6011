@@ -63,7 +63,6 @@ public class DNSRecord {
 
     public static DNSRecord decodeRecord(InputStream inputStream, DNSMessage message) throws IOException {
 
-        //TODO CHECK FOR COMPRESSION --> if compressed call read domain name with the int location 4.1.4 compression in document
         DNSRecord record = new DNSRecord();
         DataInputStream dataInputStream = new DataInputStream(inputStream);
         //check for compression here
@@ -75,7 +74,6 @@ public class DNSRecord {
         // Prepare to mark the stream before reading (for potential reset)
         dataInputStream.mark(2); // Marks the current position in the stream
         short firstTwoBytes = dataInputStream.readShort();
-        dataInputStream.reset(); // Resets the stream to the most recent mark
 
         // Check if the first two bytes indicate a pointer (compression)
         if ((firstTwoBytes & 0xC000) == 0xC000) { // Compression flag is set
@@ -83,6 +81,7 @@ public class DNSRecord {
             // Assuming DNSMessage has a method to handle reading a domain name from a specific byte offset
             record.name = message.readDomainName(offset);
         } else {
+            dataInputStream.reset(); // Resets the stream to the most recent mark
             // Normal domain name reading without compression
             record.name = message.readDomainName(inputStream);
         }
@@ -132,4 +131,6 @@ public class DNSRecord {
         //if the current time is greater than the total time to live, then it is expired
         return currentTime > expirationTime;
     }
+
+
 }

@@ -10,6 +10,10 @@ public class DNSCache {
         cache = new HashMap<>();
     }
 
+    public static HashMap<DNSQuestion, DNSRecord> getCache() {
+        return cache;
+    }
+
     public static DNSRecord query(DNSQuestion question) {
         // check if the cache contains the question
         if (cache.containsKey(question)) {

@@ -58,6 +58,8 @@ public class DNSMessage {
         dnsMessage.questions = new DNSQuestion[dnsMessage.header.getQdCount()];
         readQuestions(byteArrayInputStream, dnsMessage);
 
+        //TODO
+        //if answers is empty - it could be a bad response
         // Read answers
         dnsMessage.answers = new DNSRecord[dnsMessage.header.getAnCount()];
         readRecords(byteArrayInputStream, dnsMessage.answers, dnsMessage.header.getAnCount(), dnsMessage);
@@ -156,7 +158,7 @@ public class DNSMessage {
     static DNSMessage buildResponse(DNSMessage request, DNSRecord[] answers){
         DNSMessage response = new DNSMessage();
         response.header = DNSHeader.buildHeaderForResponse(request,response);
-        response.questions = request.getQuestions();
+        response.questions = request.questions;
         response.answers = answers;
         response.authorityRecords = request.getAuthorityRecords();
         response.additionalRecords = request.getAdditionalRecords();
