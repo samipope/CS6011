@@ -1,0 +1,41 @@
+Samantha Pope
+CS6013 Quiz 
+
+total: -4 points 
+17/21 points total!! 
+
+1. In high level language, what 3 things does function declaration require 
+- name of function
+- what function returns (type)
+- paramters of function
+
+-2 points
+2. in assembly language 3 parts
+- prologue
+- code function
+- epilogue
+
+2b. -1 point
+- prologue - sets up registers, sets up pointers, allocate memory on the 
+stack/heap for variables
+- code - tells us step by step instructions on how to carry out the 
+function to obtain our answer/desired result
+- epilogue - answer in register rax, cleans up pointers, cleanas up memory
+
+ 
+3. two things cannot do without OS support
+- access files
+- access keyboard
+
+4. write system calls to ask the operating system to do those things. in 
+order to do this sys call, you need to change the register values to the 
+ones outlined by the table in lecture (ex: 1 in rax is the syscall for 
+write)
+
+5. when you run a syscall, you change levels into the kernel level. then 
+the operating system has a pointer that it must shift to whatever call you 
+were trying to make (ex 1 for write), then the operating system executes 
+those lines of code that the syscall outlines. then the operating system 
+puts the return values into the correct registers, resets its pointer so 
+it can continue normal processing later and then goes back up to the outer 
+layers of privilege to go back to the user part. 

@@ -62,7 +62,9 @@ public class DNSServer {
                         googleSocket.receive(responsePacket); // Receive response from Google
 
                         DNSMessage googleResponse = DNSMessage.decodeMessage(responsePacket.getData());
-                        if(googleResponse.getAnswers().length!=0) {
+                        if(googleResponse.getAnswers() ==null ||googleResponse.getAnswers().length==0) {
+                            System.out.println("length of answer is 0 --> domain name DNE");
+                        }else{
                             for (DNSRecord answer : googleResponse.getAnswers()) {
                                 cache.insert(question, answer); // cache the new answer
                             }

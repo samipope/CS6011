@@ -135,9 +135,13 @@ public short getQdCount(){return qdCount;}
      */
     static DNSHeader buildHeaderForResponse(DNSMessage request, DNSMessage response){
         DNSHeader builtHeader = request.getHeader();
+        if(response.getAnswers()==null || response.getAnswers().length==0 ){
+            builtHeader.anCount=0;
+        }
+        else {
+            builtHeader.anCount=1;
+        }
 
-
-        builtHeader.anCount=1;
         builtHeader.QR=1;
         return builtHeader;
     }
