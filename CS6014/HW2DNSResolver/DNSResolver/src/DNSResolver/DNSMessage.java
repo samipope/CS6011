@@ -58,7 +58,6 @@ public class DNSMessage {
         dnsMessage.questions = new DNSQuestion[dnsMessage.header.getQdCount()];
         readQuestions(byteArrayInputStream, dnsMessage);
 
-        //TODO
         //if answers is empty - it could be a bad response
         // Read answers
         dnsMessage.answers = new DNSRecord[dnsMessage.header.getAnCount()];
