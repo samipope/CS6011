@@ -7,7 +7,7 @@ public class Main {
 
 
             // Get properties from the system about samples rates, etc.
-// AudioSystem is a class from the Java standard library.
+            // AudioSystem is a class from the Java standard library.
             Clip c = AudioSystem.getClip(); // Note, this is different from our AudioClip class.
 
         AudioListener listener = new AudioListener(c);
@@ -25,17 +25,17 @@ public class Main {
             mixer.connectInput(gen2);
 
 
-            //testing the volume adjuster and mixer
-//            VolumeAdjuster adjuster = new VolumeAdjuster(1f);
-//            adjuster.connectInput(mixer);
-//           AudioClip clip = adjuster.getClip();
+         //   testing the volume adjuster and mixer
+            VolumeAdjuster adjuster = new VolumeAdjuster(1f);
+            adjuster.connectInput(mixer);
+           AudioClip clip = adjuster.getClip();
 
 
        // comment out to test linear ramp
             VFWave wave = new VFWave();
             LinearRamp ramp = new LinearRamp(50,2000);
             wave.connectInput(ramp);
-            AudioClip clip = wave.getClip();
+        //    AudioClip clip = wave.getClip();
 
 
 
@@ -47,15 +47,6 @@ public class Main {
             System.out.println("About to play...");
             c.start(); // Plays it.
         c.addLineListener(listener);
-
-         //   c.loop(0); // Plays it 2 more times if desired, so 6 seconds total
-
-            //Change this to class example today (AudioListener
-//            while (c.getFramePosition() < AudioClip.TOTAL_SAMPLES || c.isActive() || c.isRunning()) {
-//                // Do nothing while we wait for the note to play.
-//            }
-
-
 
             System.out.println("Done.");
         //    c.close();

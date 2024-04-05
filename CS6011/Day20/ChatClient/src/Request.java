@@ -24,7 +24,10 @@ public class Request {
     }
 
     public String getFilePath(String fn) {
-        return "/Users/samanthapope/6011Github/Github/CS6011/Day20/ChatClient/resources/" + fn;
+
+            String basePath = "/Users/samanthapope/MSD/Github/CS6011/Day20/ChatClient/resources";
+            return basePath + fn; // Ensure 'fn' begins with '/' to construct the path correctly.
+
     }
 
     private void checkIfFileExists() {

@@ -22,20 +22,13 @@ import javafx.scene.shape.Circle;
 public class AudioComponentWidget extends Pane {
     public AudioComponent ac_;
     AnchorPane parent_;
-
     Slider volumeSlider;
-
     Circle output;
-
-
     Line line_;
     double mouseXpos, mouseYpos, widgetXpos, widgetYpos;
-
     public HBox baseLayout;
     VBox rightSide;
     VBox leftSide;
-
-
     Label volumeLabel;
 
     //constructor
@@ -44,7 +37,6 @@ public class AudioComponentWidget extends Pane {
         parent_ = parent;
         baseLayout = new HBox();
         baseLayout.setStyle("-fx-background-color: #98d398; -fx-border-color: white; -fx-border-width: 2px; -fx-font-family: 'Comic Sans MS'; -fx-font-weight: bold; -fx-text-fill: #a3d3a3; -fx-font-size: 14;");
-
         //VBOX for LEFT
         leftSide = new VBox();
 

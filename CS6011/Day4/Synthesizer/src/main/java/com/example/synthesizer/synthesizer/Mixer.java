@@ -37,8 +37,7 @@ public class Mixer implements AudioComponent {
         }
 
 
-
-        //anyone can connect to the mixer anytime they want so we submit all of it to the input
+        //anyone can connect to the mixer anytime they want - so we submit all of it to the input
         public boolean hasInput() {
             return false;
         }

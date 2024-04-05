@@ -5,4 +5,6 @@ module com.example.hw10v2 {
 
     opens com.example.hw10v2 to javafx.fxml;
     exports com.example.hw10v2;
+    exports ServerClient;
+    opens ServerClient to javafx.fxml;
 }

@@ -38,7 +38,7 @@ public class VolumeAdjusterWidget extends AudioComponentWidget {
         rightSide.getChildren().add(volumeLabel);
         volumeSlider = new Slider(0, 6, 3);
         volumeSlider.setOnMouseDragged(this::handleVolumeSlider);
-        volumeSlider.setStyle("-fx-color: #F18DBC");
+        volumeSlider.setStyle("-fx-color: #000000");
         volumeSlider.setShowTickLabels(true);
         volumeSlider.setShowTickMarks(true);
         rightSide.getChildren().add(volumeSlider);

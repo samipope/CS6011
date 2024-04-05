@@ -1,6 +1,5 @@
 package com.example.synthesizer.synthesizer;
 //From the Main
-
 import javafx.application.Application;
 import javafx.scene.input.MouseEvent;
 import javafx.geometry.Bounds;
@@ -17,7 +16,6 @@ import javafx.stage.Stage;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -39,7 +37,8 @@ public class SynthesizerApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-       com.example.synthesizer.synthesizer.Mixer mixer = new Mixer();
+        Mixer mixer = new Mixer();
+//       com.example.synthesizer.synthesizer.Mixer mixer = new Mixer();
         BorderPane mainLayout = new BorderPane();
 
         //Right Panel
