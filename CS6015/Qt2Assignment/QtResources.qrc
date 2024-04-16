@@ -1,0 +1,9 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+  <qresource>
+    <file alias="water">images/water.gif</file>
+    <file alias="bucket">images/bucket.png</file>
+    <file alias="cloud">images/cloud.png</file>
+    <file alias="background">images/background.jpg</file>
+  </qresource>
+</RCC>
