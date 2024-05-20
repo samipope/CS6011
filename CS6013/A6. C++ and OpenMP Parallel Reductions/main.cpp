@@ -127,12 +127,12 @@ std::pair<T, std::chrono::milliseconds> parallelSumOpenMPBuiltIn(T array[], size
 
 int main() {
 
-    size_t N = 2560000000;
+    size_t N = 100000;
     float * a = new float [N];
     for(size_t i=0; i< N; i++){
         a[i]=i; //fill up array
     }
-    size_t numThreads = 256;
+    size_t numThreads = 10;
 
     /**
    * PART ONE: make a timed test for using the STD C++ parallel reduction
