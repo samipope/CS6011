@@ -1,0 +1,1 @@
+-v --force --timestamp=none --sign - /Users/samanthapope/MSD/Github/CS6016/Labs/Lab6/ChessBrowser/ChessBrowser/bin/Debug/net8.0-ios/iossimulator-arm64/ChessBrowser.app/libmono-component-debugger.dylib

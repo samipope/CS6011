@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": ".NET Core Launch (MacCatalyst)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/ChessBrowser/ChessBrowser/bin/Debug/net8.0-maccatalyst/ChessBrowser.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}/ChessBrowser/ChessBrowser",
+        "stopAtEntry": false,
+        "console": "internalConsole",
+        "logging": {
+          "engineLogging": false
+        }
+      },
+      {
+        "name": ".NET Core Launch (iOS Simulator)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/ChessBrowser/ChessBrowser/bin/Debug/net8.0-ios/ChessBrowser.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}/ChessBrowser/ChessBrowser",
+        "stopAtEntry": false,
+        "console": "internalConsole",
+        "logging": {
+          "engineLogging": false
+        }
+      }
+    ]
+  }
+  
