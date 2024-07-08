@@ -23,7 +23,7 @@ namespace ChessBrowser
             // assuming you've typed a user and password in the GUI
             string connection = mainPage.GetConnectionString();
 
-            // Load and parse the PGN file
+            // load and parse
             List<ChessGame> games = PgnReader.ReadGamesFromFile(PGNfilename);
             mainPage.SetNumWorkItems(games.Count);
 
@@ -31,21 +31,22 @@ namespace ChessBrowser
             {
                 try
                 {
-                    // Open a connection
+                    // open a connection
                     await conn.OpenAsync();
 
                     foreach (ChessGame game in games)
                     {
-                        // Insert into the Events table
+                        // ------ EVENTS ------------
+                        // insert into the Events table
                         int eventId = await GetOrCreateEventAsync(conn, game);
 
-                        // Insert and update the White Player
+                        // -------- PLAYERS --------------
+                        // insert and update the White Player
                         int whitePlayerId = await GetOrCreatePlayerAsync(conn, game.WhitePlayer, game.WhiteElo);
-
-                        // Insert and update the Black Player
+                        // insert and update the Black Player
                         int blackPlayerId = await GetOrCreatePlayerAsync(conn, game.BlackPlayer, game.BlackElo);
 
-                        // Insert into the Games table
+                        // --------- GAMES ---------------
                         string insertGameQuery = "INSERT IGNORE INTO Games (Round, Result, Moves, BlackPlayer, WhitePlayer, eID) " +
                                                  "VALUES (@Round, @Result, @Moves, @BlackPlayer, @WhitePlayer, @eID)";
                         using (MySqlCommand gameCommand = new MySqlCommand(insertGameQuery, conn))
@@ -59,11 +60,10 @@ namespace ChessBrowser
                             await gameCommand.ExecuteNonQueryAsync();
                         }
 
-                        // Notify the GUI that one work item has been completed
-                        await mainPage.NotifyWorkItemCompleted();
+                        await mainPage.NotifyWorkItemCompleted(); //tell GUI to continue
                     }
                 }
-                catch (Exception e)
+                catch (Exception e) // MUST CATCH ERRORS BECAUSE IF NOT IT FREEZES
                 {
                     System.Diagnostics.Debug.WriteLine($"An error occurred: {e.Message}");
                     System.Diagnostics.Debug.WriteLine($"Stack Trace: {e.StackTrace}");
@@ -71,28 +71,33 @@ namespace ChessBrowser
             }
         }
 
-        private static async Task<int> GetOrCreateEventAsync(MySqlConnection conn, ChessGame game)
+        internal static async Task<int> GetOrCreateEventAsync(MySqlConnection conn, ChessGame game)
         {
-            var selectEventCommand = new MySqlCommand(
-                "SELECT eID FROM Events WHERE Name = @Name AND Site = @Site AND EventDate = @EventDate", conn);
-            selectEventCommand.Parameters.AddWithValue("@Name", game.EventName);
-            selectEventCommand.Parameters.AddWithValue("@Site", game.Site);
-            selectEventCommand.Parameters.AddWithValue("@EventDate", game.EventDate);
-
-            var eventId = await selectEventCommand.ExecuteScalarAsync();
-            if (eventId != null)
+            string query = "SELECT eID FROM Events WHERE Name = @Name AND Site = @Site AND Date = @Date";
+            using (var cmd = new MySqlCommand(query, conn))
             {
-                return Convert.ToInt32(eventId);
+                cmd.Parameters.AddWithValue("@Name", game.EventName);
+                cmd.Parameters.AddWithValue("@Site", game.Site);
+                cmd.Parameters.AddWithValue("@Date", game.Date);
+
+                var result = await cmd.ExecuteScalarAsync();
+                if (result != null)
+                {
+                    return Convert.ToInt32(result);
+                }
+                else
+                {
+                    query = "INSERT INTO Events (Name, Site, Date) VALUES (@Name, @Site, @Date); SELECT LAST_INSERT_ID();";
+                    using (var insertCmd = new MySqlCommand(query, conn))
+                    {
+                        insertCmd.Parameters.AddWithValue("@Name", game.EventName);
+                        insertCmd.Parameters.AddWithValue("@Site", game.Site);
+                        insertCmd.Parameters.AddWithValue("@Date", game.Date);
+
+                        return Convert.ToInt32(await insertCmd.ExecuteScalarAsync());
+                    }
+                }
             }
-
-            var insertEventCommand = new MySqlCommand(
-                "INSERT INTO Events (Name, Site, EventDate) VALUES (@Name, @Site, @EventDate)", conn);
-            insertEventCommand.Parameters.AddWithValue("@Name", game.EventName);
-            insertEventCommand.Parameters.AddWithValue("@Site", game.Site);
-            insertEventCommand.Parameters.AddWithValue("@EventDate", game.EventDate);
-            await insertEventCommand.ExecuteNonQueryAsync();
-
-            return (int)insertEventCommand.LastInsertedId;
         }
 
         private static async Task<int> GetOrCreatePlayerAsync(MySqlConnection conn, string playerName, int elo)
@@ -132,106 +137,106 @@ namespace ChessBrowser
         /// <param name="showMoves">True if the returned data should include the PGN moves</param>
         /// <param name="mainPage">The main page of the application</param>
         /// <returns>A string separated by newlines containing the filtered games</returns>
-      internal static string PerformQuery(string white, string black, string opening, string winner, bool useDate, DateTime start, DateTime end, bool showMoves, MainPage mainPage)
-{
-    // This will build a connection string to your user's database on atr,
-    // assuming you've typed a user and password in the GUI
-    string connection = mainPage.GetConnectionString();
-
-    // Build up this string containing the results from your query
-    StringBuilder parsedResult = new StringBuilder();
-
-    // Use this to count the number of rows returned by your query
-    int numRows = 0;
-
-    using (MySqlConnection conn = new MySqlConnection(connection))
-    {
-        try
+        internal static string PerformQuery(string white, string black, string opening, string winner, bool useDate, DateTime start, DateTime end, bool showMoves, MainPage mainPage)
         {
-            // Open a connection
-            conn.Open();
+            // This will build a connection string to your user's database on atr,
+            // assuming you've typed a user and password in the GUI
+            string connection = mainPage.GetConnectionString();
 
-            // Generate and execute an SQL command, then parse the results into an appropriate string and return it.
-            StringBuilder query = new StringBuilder("SELECT e.Name AS EventName, e.Site, e.Date, ")
-                .Append("p1.Name AS WhitePlayerName, p2.Name AS BlackPlayerName, ")
-                .Append("p1.Elo AS WhiteElo, p2.Elo AS BlackElo, g.Result, g.Moves ")
-                .Append("FROM Events e JOIN Games g ON e.eID = g.eID ")
-                .Append("JOIN Players p1 ON g.WhitePlayer = p1.pID ")
-                .Append("JOIN Players p2 ON g.BlackPlayer = p2.pID WHERE TRUE");
+            // Build up this string containing the results from your query
+            StringBuilder parsedResult = new StringBuilder();
 
-            if (!string.IsNullOrEmpty(white))
-            {
-                query.Append(" AND p1.Name = @WhitePlayerName");
-            }
-            if (!string.IsNullOrEmpty(black))
-            {
-                query.Append(" AND p2.Name = @BlackPlayerName");
-            }
-            if (!string.IsNullOrEmpty(opening))
-            {
-                query.Append(" AND Moves LIKE @OpeningMove");
-            }
-            if (!string.IsNullOrEmpty(winner))
-            {
-                query.Append(" AND Result = @Result");
-            }
-            if (useDate)
-            {
-                query.Append(" AND Date >= @StartDate AND Date <= @EndDate");
-            }
+            // Use this to count the number of rows returned by your query
+            int numRows = 0;
 
-            using (MySqlCommand cmd = new MySqlCommand(query.ToString(), conn))
+            using (MySqlConnection conn = new MySqlConnection(connection))
             {
-                if (!string.IsNullOrEmpty(white))
+                try
                 {
-                    cmd.Parameters.AddWithValue("@WhitePlayerName", white);
-                }
-                if (!string.IsNullOrEmpty(black))
-                {
-                    cmd.Parameters.AddWithValue("@BlackPlayerName", black);
-                }
-                if (!string.IsNullOrEmpty(opening))
-                {
-                    cmd.Parameters.AddWithValue("@OpeningMove", $"{opening}%");
-                }
-                if (!string.IsNullOrEmpty(winner))
-                {
-                    cmd.Parameters.AddWithValue("@Result", winner);
-                }
-                if (useDate)
-                {
-                    cmd.Parameters.AddWithValue("@StartDate", start);
-                    cmd.Parameters.AddWithValue("@EndDate", end);
-                }
+                    // Open a connection
+                    conn.Open();
 
-                using (MySqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+                    // Generate and execute an SQL command, then parse the results into an appropriate string and return it.
+                    StringBuilder query = new StringBuilder("SELECT e.Name AS EventName, e.Site, e.Date, ")
+                        .Append("p1.Name AS WhitePlayerName, p2.Name AS BlackPlayerName, ")
+                        .Append("p1.Elo AS WhiteElo, p2.Elo AS BlackElo, g.Result, g.Moves ")
+                        .Append("FROM Events e JOIN Games g ON e.eID = g.eID ")
+                        .Append("JOIN Players p1 ON g.WhitePlayer = p1.pID ")
+                        .Append("JOIN Players p2 ON g.BlackPlayer = p2.pID WHERE TRUE");
+
+                    if (!string.IsNullOrEmpty(white))
                     {
-                        numRows++;
-                        parsedResult.AppendLine()
-                                    .AppendLine($"Event: {reader["EventName"]}")
-                                    .AppendLine($"Site: {reader["Site"]}")
-                                    .AppendLine($"Date: {reader["Date"]}")
-                                    .AppendLine($"White: {reader["WhitePlayerName"]} ({reader["WhiteElo"]})")
-                                    .AppendLine($"Black: {reader["BlackPlayerName"]} ({reader["BlackElo"]})")
-                                    .AppendLine($"Result: {reader["Result"]}");
+                        query.Append(" AND p1.Name = @WhitePlayerName");
+                    }
+                    if (!string.IsNullOrEmpty(black))
+                    {
+                        query.Append(" AND p2.Name = @BlackPlayerName");
+                    }
+                    if (!string.IsNullOrEmpty(opening))
+                    {
+                        query.Append(" AND Moves LIKE @OpeningMove");
+                    }
+                    if (!string.IsNullOrEmpty(winner))
+                    {
+                        query.Append(" AND Result = @Result");
+                    }
+                    if (useDate)
+                    {
+                        query.Append(" AND Date >= @StartDate AND Date <= @EndDate");
+                    }
 
-                        if (showMoves)
+                    using (MySqlCommand cmd = new MySqlCommand(query.ToString(), conn))
+                    {
+                        if (!string.IsNullOrEmpty(white))
                         {
-                            parsedResult.AppendLine($"Moves: {reader["Moves"]}");
+                            cmd.Parameters.AddWithValue("@WhitePlayerName", white);
+                        }
+                        if (!string.IsNullOrEmpty(black))
+                        {
+                            cmd.Parameters.AddWithValue("@BlackPlayerName", black);
+                        }
+                        if (!string.IsNullOrEmpty(opening))
+                        {
+                            cmd.Parameters.AddWithValue("@OpeningMove", $"{opening}%");
+                        }
+                        if (!string.IsNullOrEmpty(winner))
+                        {
+                            cmd.Parameters.AddWithValue("@Result", winner);
+                        }
+                        if (useDate)
+                        {
+                            cmd.Parameters.AddWithValue("@StartDate", start);
+                            cmd.Parameters.AddWithValue("@EndDate", end);
+                        }
+
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                numRows++;
+                                parsedResult.AppendLine()
+                                            .AppendLine($"Event: {reader["EventName"]}")
+                                            .AppendLine($"Site: {reader["Site"]}")
+                                            .AppendLine($"Date: {reader["Date"]}")
+                                            .AppendLine($"White: {reader["WhitePlayerName"]} ({reader["WhiteElo"]})")
+                                            .AppendLine($"Black: {reader["BlackPlayerName"]} ({reader["BlackElo"]})")
+                                            .AppendLine($"Result: {reader["Result"]}");
+
+                                if (showMoves)
+                                {
+                                    parsedResult.AppendLine($"Moves: {reader["Moves"]}");
+                                }
+                            }
                         }
                     }
                 }
+                catch (Exception e)
+                {
+                    System.Diagnostics.Debug.WriteLine(e.Message);
+                }
             }
-        }
-        catch (Exception e)
-        {
-            System.Diagnostics.Debug.WriteLine(e.Message);
+
+            return $"{numRows} results{parsedResult}";
         }
     }
-
-    return $"{numRows} results{parsedResult}";
-}
-}
 }
