@@ -27,7 +27,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0262d91-a212-4289-b407-fa77ba60af66" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../CS6014/HW2DNSResolver/DNSResolver/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../CS6014/HW2DNSResolver/DNSResolver/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +87,6 @@
 }</component>
   <component name="RunManager">
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App">
-      <module name="Lab2Version2.app.main" />
       <option name="DEPLOY" value="true" />
       <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
       <option name="DEPLOY_AS_INSTANT" value="false" />
