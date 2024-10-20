@@ -1,0 +1,29 @@
+### get all posts
+GET http://localhost:8080/posts
+
+###
+
+### create a new post
+POST http://localhost:8080/posts
+Content-Type: application/json
+
+{
+  "text": "My first post"
+}
+
+###
+
+### get post by ID
+GET http://localhost:8080/posts/1
+
+###
+
+### view posts since a certain time
+GET http://localhost:8080/posts/since/1697664000
+
+###
+
+### delete post by ID
+DELETE http://localhost:8080/posts/1
+
+###
